@@ -38,7 +38,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.MyHolder> {
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
 
-        BankDataModel.BankModel bankModel = bankDataModelList.get(position);
+     //   BankDataModel.BankModel bankModel = bankDataModelList.get(position);
 
     }
 

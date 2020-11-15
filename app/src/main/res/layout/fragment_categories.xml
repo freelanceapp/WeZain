@@ -38,7 +38,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".7"
-                android:background='@{lang.equals("ar")?@drawable/right_rounded:@drawable/left_rounded}'
 
                 >
 

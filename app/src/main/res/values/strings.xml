@@ -56,5 +56,6 @@
     <string name="contact_us2">Contact Us</string>
     <string name="discount">Discount</string>
     <string name="fast">Fast</string>
+    <string name="no_orders_to_show">No Orders To Show</string>
 
 </resources>

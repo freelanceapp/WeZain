@@ -14,7 +14,7 @@
     <string name="wait">انتظر</string>
     <string name="home">الرئيسية</string>
     <string name="next">التالي</string>
-    <string name="login">الدخول</string>
+    <string name="login">تسجيل الدخول</string>
     <string name="code">الكود</string>
     <string name="user_phone">رقم الجوال</string>
     <string name="skip">تخطى</string>
@@ -30,5 +30,9 @@
     <string name="select_image_to_upload">إختر صورة لرفعها</string>
     <string name="choose_language"><![CDATA[إختر <font color="#F61C00">اللغة</font>]]></string>
     <string name="no_data_to_show">لا توجد اقسام لعرضها</string>
+    <string name="phone">phone</string>
+    <string name="or">Or</string>
+    <string name="google">جوجل</string>
+    <string name="facebook">فيس بوك</string>
 
 </resources>

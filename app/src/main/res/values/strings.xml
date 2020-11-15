@@ -29,5 +29,9 @@
     <string name="select_image_to_upload">Select Image to Upload</string>
     <string name="choose_language"><![CDATA[Choose <font color="#F61C00">Language</font>]]></string>
     <string name="no_data_to_show">No Data To Show</string>
+    <string name="phone">phone</string>
+    <string name="or">Or</string>
+    <string name="google">Google</string>
+    <string name="facebook">facebook</string>
 
 </resources>

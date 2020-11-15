@@ -23,4 +23,6 @@
     <color name="rate_color">#FFD800</color>
     <color name="black_trans">#55000000</color>
     <color name="color_primary_trans">#55006699</color>
+    <color name="google">#DB4437</color>
+    <color name="facebook">#4267B2</color>
 </resources>

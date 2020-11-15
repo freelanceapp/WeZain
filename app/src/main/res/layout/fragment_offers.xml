@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/tvNoData"
@@ -23,8 +24,9 @@
             android:layout_gravity="center"
             android:textSize="18sp"
             android:text="@string/no_data_to_show"
+
             android:textColor="@color/black"
-            android:visibility="visible"
+            android:visibility="gone"
             />
     </FrameLayout>
 </layout>

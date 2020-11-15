@@ -1,6 +1,7 @@
 package com.wezain.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -39,6 +40,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.MyHolder> {
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
 
 //        BankDataModel.BankModel bankModel = bankDataModelList.get(position);
+        holder.bankRowBinding.tvOldprice.setPaintFlags(holder.bankRowBinding.tvOldprice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
     }
 

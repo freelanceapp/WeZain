@@ -63,7 +63,9 @@
                         android:id="@+id/progBarSlider"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        />
                 </FrameLayout>
 
                 <FrameLayout
@@ -135,6 +137,7 @@
                         android:id="@+id/progBarOffer"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
+                        android:visibility="gone"
                         android:layout_gravity="center" />
 
                 </FrameLayout>
@@ -237,6 +240,7 @@
                         android:id="@+id/progBarAccessories"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
+                        android:visibility="gone"
                         android:layout_gravity="center" />
                 </FrameLayout>
                 <LinearLayout

@@ -49,13 +49,13 @@
     <string name="fast">السريعة</string>
     <string name="my_profile">حسابى</string>
     <string name="my_orders">طلباتى</string>
-    <string name="favourite">Favourite</string>
-    <string name="addresses">Addresses</string>
-    <string name="setting">Setting</string>
-    <string name="country">Country</string>
-    <string name="language">Language</string>
-    <string name="contact_us">Contact us</string>
-    <string name="helping">Helping</string>
-    <string name="contact_us2">Contact Us</string>
+    <string name="favourite">المفضله</string>
+    <string name="addresses">العنواين</string>
+    <string name="setting">الاعدادات</string>
+    <string name="country">الدوله</string>
+    <string name="language">اللغه</string>
+    <string name="contact_us">الاتصال بنا</string>
+    <string name="helping">مساعدة</string>
+    <string name="contact_us2">تواصل معنا</string>
     <string name="no_orders_to_show">لا يوجد طلبات لعرضها</string>
 </resources>

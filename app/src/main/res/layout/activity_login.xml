@@ -159,17 +159,17 @@
                         android:layout_weight=".3"
                         android:background="@drawable/circle_bg_white"
                         >
+
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="26dp"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
                             android:layout_gravity="center"
-                            android:text="@string/or"
                             android:gravity="center"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
-                            />
+                            android:text="@string/or"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
                     </FrameLayout>
                     <View
                         android:layout_width="0dp"

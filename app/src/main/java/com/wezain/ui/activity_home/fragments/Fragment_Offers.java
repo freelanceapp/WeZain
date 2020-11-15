@@ -12,15 +12,23 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.wezain.R;
+import com.wezain.adapters.DataAdapter;
+import com.wezain.adapters.OfferAdapter;
 import com.wezain.databinding.FragmentOffersBinding;
+import com.wezain.models.BankDataModel;
 import com.wezain.ui.activity_home.HomeActivity;
+
+import java.util.ArrayList;
 
 public class Fragment_Offers extends Fragment {
     private FragmentOffersBinding binding;
     private HomeActivity activity;
+    private OfferAdapter auctionAdapter;
+
     public static Fragment_Offers newInstance(){
         return new Fragment_Offers();
     }
@@ -37,5 +45,9 @@ public class Fragment_Offers extends Fragment {
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(activity));
         binding.progBar.setVisibility(View.GONE);
+        auctionAdapter = new OfferAdapter( new ArrayList<BankDataModel.BankModel>(),activity);
+        binding.recView.setLayoutManager(new LinearLayoutManager(activity));
+        binding.recView.setAdapter(auctionAdapter);
+
     }
 }

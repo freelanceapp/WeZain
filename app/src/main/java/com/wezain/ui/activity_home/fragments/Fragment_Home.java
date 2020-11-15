@@ -10,12 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.wezain.R;
+import com.wezain.adapters.DataAdapter;
 import com.wezain.adapters.SliderAdapter;
 import com.wezain.databinding.FragmentHomeBinding;
 
+import com.wezain.models.BankDataModel;
 import com.wezain.ui.activity_home.HomeActivity;
+
+import java.util.ArrayList;
 
 
 public class Fragment_Home extends Fragment {
@@ -23,6 +29,7 @@ public class Fragment_Home extends Fragment {
     private double lat=0.0,lng=0.0;
     private HomeActivity activity;
     private SliderAdapter sliderAdapter;
+    private DataAdapter auctionAdapter;
 
 
     public static Fragment_Home newInstance(double lat,double lng){
@@ -42,8 +49,14 @@ public class Fragment_Home extends Fragment {
     }
 
     private void initView() {
+
         activity = (HomeActivity) getActivity();
         Bundle bundle = getArguments();
+        auctionAdapter = new DataAdapter( new ArrayList<BankDataModel.BankModel>(),activity);
+        binding.recViewAccessories.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL,false));
+        binding.recViewAccessories.setAdapter(auctionAdapter);
+        binding.recViewFavoriteOffers.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL,false));
+        binding.recViewFavoriteOffers.setAdapter(auctionAdapter);
         if (bundle!=null){
             lat = bundle.getDouble("lat");
             lng = bundle.getDouble("lng");

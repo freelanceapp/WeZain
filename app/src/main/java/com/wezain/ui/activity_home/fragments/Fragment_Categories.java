@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.wezain.R;
-import com.wezain.databinding.FragmentAppoinmentsBinding;
+import com.wezain.databinding.FragmentCategoriesBinding;
 import com.wezain.ui.activity_home.HomeActivity;
 
 public class Fragment_Categories extends Fragment {
-    private FragmentAppoinmentsBinding binding;
+    private FragmentCategoriesBinding binding;
     private HomeActivity activity;
     public static Fragment_Categories newInstance(){
         return new Fragment_Categories();

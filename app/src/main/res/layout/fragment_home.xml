@@ -128,6 +128,43 @@
                 </FrameLayout>
 
                 <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/fast_offer"
+                    />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color1"
+                            android:gravity="center"
+                            android:textSize="25sp"
+                            android:paddingLeft="160dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="@string/offers"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:textColor="@color/color1"
+                            android:textSize="25sp"
+                            android:gravity="center"
+                            android:paddingLeft="130dp"
+
+                            android:layout_height="wrap_content"
+                            android:text="@string/fast"/>
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
                     android:id="@+id/flMostRate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

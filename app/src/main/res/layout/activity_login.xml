@@ -98,7 +98,6 @@
                             app:civ_border_color="@color/white"
                             app:civ_border_width="1dp"
                             app:civ_circle_background_color="@color/white"
-                            app:civ_circle_color="@color/white"
 
                             />
 

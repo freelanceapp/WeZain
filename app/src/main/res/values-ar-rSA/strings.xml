@@ -45,4 +45,6 @@
     <string name="ok">حسنا</string>
     <string name="favorite_offers">عروضنا المفضلة</string>
     <string name="show_all">عرض الكل</string>
+    <string name="discount">خصم</string>
+    <string name="fast">السريعة</string>
 </resources>

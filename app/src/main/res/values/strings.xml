@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">We Zain</string>
+    <string name="field_req">Field required</string>
+    <string name="failed">Failed</string>
+    <string name="terms_and_conditions">Terms And Conditions</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+    <string name="confirm">Confirm</string>
+    <string name="share_app">Share App</string>
+    <string name="rate_app">Rate App</string>
+    <string name="logout">Logout</string>
+    <string name="about_app">About App</string>
+    <string name="notifications">Notifications</string>
+    <string name="wait">Wait</string>
+    <string name="home">Home</string>
+    <string name="next">Next</string>
+    <string name="login">Log In</string>
+    <string name="code">Code</string>
+    <string name="user_phone">Phone number</string>
+    <string name="skip">Skip</string>
+    <string name="name">name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="select">Select</string>
+    <string name="cancel">Cancel</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="perm_image_denied">Permission image denied</string>
+    <string name="privacy">Privacy policy</string>
+    <string name="upload_image">Upload image</string>
+    <string name="select_image_to_upload">Select Image to Upload</string>
+    <string name="choose_language"><![CDATA[Choose <font color="#F61C00">Language</font>]]></string>
+    <string name="no_data_to_show">No Data To Show</string>
+
+</resources>

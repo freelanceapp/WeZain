@@ -24,7 +24,7 @@
             android:textSize="18sp"
             android:text="@string/no_data_to_show"
             android:textColor="@color/black"
-            android:visibility="gone"
+            android:visibility="visible"
             />
     </FrameLayout>
 </layout>

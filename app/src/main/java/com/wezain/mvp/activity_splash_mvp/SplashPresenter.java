@@ -3,9 +3,9 @@ package com.wezain.mvp.activity_splash_mvp;
 import android.content.Context;
 import android.os.Handler;
 
-import com.doctory_client.models.UserModel;
-import com.doctory_client.models.UserSettingsModel;
-import com.doctory_client.preferences.Preferences;
+import com.wezain.models.UserModel;
+import com.wezain.models.UserSettingsModel;
+import com.wezain.preferences.Preferences;
 
 public class SplashPresenter {
     private Context context;

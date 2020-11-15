@@ -1,6 +1,6 @@
 package com.wezain.remote;
 
-import com.doctory_client.services.Service;
+import com.wezain.services.Service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

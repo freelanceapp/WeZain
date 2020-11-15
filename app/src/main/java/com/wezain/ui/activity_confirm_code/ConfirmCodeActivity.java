@@ -8,15 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
-import com.doctory_client.R;
-import com.doctory_client.databinding.ActivityConfirmCodeBinding;
-import com.doctory_client.language.Language;
-import com.doctory_client.models.UserModel;
-import com.doctory_client.mvp.activity_confirm_code_mvp.ActivityConfirmCodePresenter;
-import com.doctory_client.mvp.activity_confirm_code_mvp.ActivityConfirmCodeView;
-import com.doctory_client.share.Common;
-import com.doctory_client.ui.activity_login.LoginActivity;
-import com.doctory_client.ui.activity_sign_up.SignUpActivity;
+import com.wezain.R;
+import com.wezain.databinding.ActivityConfirmCodeBinding;
+import com.wezain.language.Language;
+import com.wezain.models.UserModel;
+import com.wezain.mvp.activity_confirm_code_mvp.ActivityConfirmCodePresenter;
+import com.wezain.mvp.activity_confirm_code_mvp.ActivityConfirmCodeView;
+import com.wezain.share.Common;
+import com.wezain.ui.activity_login.LoginActivity;
+import com.wezain.ui.activity_sign_up.SignUpActivity;
 
 import java.util.Locale;
 

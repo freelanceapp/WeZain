@@ -9,11 +9,11 @@ import androidx.fragment.app.FragmentManager;
 import com.wezain.R;
 import com.wezain.models.UserModel;
 import com.wezain.preferences.Preferences;
-import com.wezain.ui.activity_home.fragments.Fragment_Appointment;
-import com.wezain.ui.activity_home.fragments.Fragment_Consulting;
+import com.wezain.ui.activity_home.fragments.Fragment_Categories;
+import com.wezain.ui.activity_home.fragments.Fragment_Offers;
 import com.wezain.ui.activity_home.fragments.Fragment_Home;
-import com.wezain.ui.activity_home.fragments.Fragment_Medicine;
-import com.wezain.ui.activity_home.fragments.Fragment_More;
+import com.wezain.ui.activity_home.fragments.Fragment_Orders;
+import com.wezain.ui.activity_home.fragments.Fragment_Profile;
 
 
 public class ActivityHomePresenter {
@@ -21,10 +21,10 @@ public class ActivityHomePresenter {
     private FragmentManager fragmentManager;
     private HomeActivityView view;
     private Fragment_Home fragment_home;
-    private Fragment_Appointment fragment_appointment;
-    private Fragment_Consulting fragment_consulting;
-    private Fragment_Medicine fragment_medicine;
-    private Fragment_More fragment_more;
+    private Fragment_Categories fragment_categories;
+    private Fragment_Offers fragment_offers;
+    private Fragment_Orders fragment_orders;
+    private Fragment_Profile fragment_profile;
     private Preferences preference;
     private UserModel userModel;
     private double lat=0.0,lng=0.0;
@@ -44,18 +44,18 @@ public class ActivityHomePresenter {
     public void manageFragments(MenuItem item){
         int id = item.getItemId();
         switch (id){
-            case R.id.appointment :
-                displayFragmentAppointment();
+            case R.id.categories :
+                displayFragmentCategories();
                 break;
-            case R.id.consulting :
-                displayFragmentConsulting();
+            case R.id.offers :
+                displayFragmentOffers();
                 break;
 
-            case R.id.medicine :
-                displayFragmentMedicine();
+            case R.id.orders :
+                displayFragmentOrders();
                 break;
-            case R.id.more :
-                displayFragmentMore();
+            case R.id.profile :
+                displayFragmentProfile();
                 break;
             default:
                 displayFragmentHome();
@@ -67,19 +67,19 @@ public class ActivityHomePresenter {
             fragment_home = Fragment_Home.newInstance(lat,lng);
         }
 
-        if (fragment_appointment!=null&&fragment_appointment.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_appointment).commit();
+        if (fragment_categories !=null&& fragment_categories.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_categories).commit();
         }
 
-        if (fragment_medicine!=null&&fragment_medicine.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_medicine).commit();
+        if (fragment_orders !=null&& fragment_orders.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
-        if (fragment_consulting!=null&&fragment_consulting.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_consulting).commit();
+        if (fragment_offers !=null&& fragment_offers.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_offers).commit();
         }
-        if (fragment_more!=null&&fragment_more.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        if (fragment_profile!=null&&fragment_profile.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_profile).commit();
         }
 
         if (fragment_home.isAdded()){
@@ -89,36 +89,36 @@ public class ActivityHomePresenter {
         }
     }
 
-    private void displayFragmentAppointment(){
-        if (fragment_appointment==null){
-            fragment_appointment = Fragment_Appointment.newInstance();
+    private void displayFragmentCategories(){
+        if (fragment_categories ==null){
+            fragment_categories = Fragment_Categories.newInstance();
         }
 
         if (fragment_home!=null&&fragment_home.isAdded()){
             fragmentManager.beginTransaction().hide(fragment_home).commit();
         }
 
-        if (fragment_medicine!=null&&fragment_medicine.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_medicine).commit();
+        if (fragment_orders !=null&& fragment_orders.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
-        if (fragment_consulting!=null&&fragment_consulting.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_consulting).commit();
+        if (fragment_offers !=null&& fragment_offers.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_offers).commit();
         }
-        if (fragment_more!=null&&fragment_more.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        if (fragment_profile!=null&&fragment_profile.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_profile).commit();
         }
 
-        if (fragment_appointment.isAdded()){
-            fragmentManager.beginTransaction().show(fragment_appointment).commit();
+        if (fragment_categories.isAdded()){
+            fragmentManager.beginTransaction().show(fragment_categories).commit();
         }else {
-            fragmentManager.beginTransaction().add(R.id.fragment_container,fragment_appointment,"fragment_appointment").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_categories,"fragment_appointment").commit();
         }
     }
 
-    private void displayFragmentConsulting(){
-        if (fragment_consulting==null){
-            fragment_consulting = Fragment_Consulting.newInstance();
+    private void displayFragmentOffers(){
+        if (fragment_offers ==null){
+            fragment_offers = Fragment_Offers.newInstance();
         }
 
 
@@ -126,75 +126,75 @@ public class ActivityHomePresenter {
             fragmentManager.beginTransaction().hide(fragment_home).commit();
         }
 
-        if (fragment_medicine!=null&&fragment_medicine.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_medicine).commit();
+        if (fragment_orders !=null&& fragment_orders.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
-        if (fragment_appointment!=null&&fragment_appointment.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_appointment).commit();
+        if (fragment_categories !=null&& fragment_categories.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_categories).commit();
         }
-        if (fragment_more!=null&&fragment_more.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        if (fragment_profile!=null&&fragment_profile.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_profile).commit();
         }
 
 
-        if (fragment_consulting.isAdded()){
-            fragmentManager.beginTransaction().show(fragment_consulting).commit();
+        if (fragment_offers.isAdded()){
+            fragmentManager.beginTransaction().show(fragment_offers).commit();
         }else {
-            fragmentManager.beginTransaction().add(R.id.fragment_container,fragment_consulting,"fragment_consulting").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_offers,"fragment_consulting").commit();
         }
     }
 
-    private void displayFragmentMedicine(){
-        if (fragment_medicine==null){
-            fragment_medicine = Fragment_Medicine.newInstance();
+    private void displayFragmentOrders(){
+        if (fragment_orders ==null){
+            fragment_orders = Fragment_Orders.newInstance();
         }
 
         if (fragment_home!=null&&fragment_home.isAdded()){
             fragmentManager.beginTransaction().hide(fragment_home).commit();
         }
 
-        if (fragment_consulting!=null&&fragment_consulting.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_consulting).commit();
+        if (fragment_offers !=null&& fragment_offers.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_offers).commit();
         }
 
-        if (fragment_appointment!=null&&fragment_appointment.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_appointment).commit();
+        if (fragment_categories !=null&& fragment_categories.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_categories).commit();
         }
-        if (fragment_more!=null&&fragment_more.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        if (fragment_profile!=null&&fragment_profile.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_profile).commit();
         }
 
-        if (fragment_medicine.isAdded()){
-            fragmentManager.beginTransaction().show(fragment_medicine).commit();
+        if (fragment_orders.isAdded()){
+            fragmentManager.beginTransaction().show(fragment_orders).commit();
         }else {
-            fragmentManager.beginTransaction().add(R.id.fragment_container,fragment_medicine,"fragment_medicine").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_orders,"fragment_medicine").commit();
         }
     }
 
-    private void displayFragmentMore(){
-        if (fragment_more==null){
-            fragment_more = Fragment_More.newInstance();
+    private void displayFragmentProfile(){
+        if (fragment_profile==null){
+            fragment_profile = Fragment_Profile.newInstance();
         }
 
         if (fragment_home!=null&&fragment_home.isAdded()){
             fragmentManager.beginTransaction().hide(fragment_home).commit();
         }
 
-        if (fragment_consulting!=null&&fragment_consulting.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_consulting).commit();
+        if (fragment_offers !=null&& fragment_offers.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_offers).commit();
         }
 
-        if (fragment_appointment!=null&&fragment_appointment.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_appointment).commit();
+        if (fragment_categories !=null&& fragment_categories.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_categories).commit();
         }
-        if (fragment_medicine!=null&&fragment_medicine.isAdded()){
-            fragmentManager.beginTransaction().hide(fragment_medicine).commit();
+        if (fragment_orders !=null&& fragment_orders.isAdded()){
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
-        if (fragment_more.isAdded()){
-            fragmentManager.beginTransaction().show(fragment_more).commit();
+        if (fragment_profile.isAdded()){
+            fragmentManager.beginTransaction().show(fragment_profile).commit();
         }else {
-            fragmentManager.beginTransaction().add(R.id.fragment_container,fragment_more,"fragment_more").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_container,fragment_profile,"fragment_profile").commit();
         }
     }
 

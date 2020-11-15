@@ -17,18 +17,16 @@ import com.wezain.R;
 import com.wezain.databinding.FragmentAppoinmentsBinding;
 import com.wezain.ui.activity_home.HomeActivity;
 
-import java.util.ArrayList;
-
-public class Fragment_Appointment extends Fragment {
+public class Fragment_Categories extends Fragment {
     private FragmentAppoinmentsBinding binding;
     private HomeActivity activity;
-    public static Fragment_Appointment newInstance(){
-        return new Fragment_Appointment();
+    public static Fragment_Categories newInstance(){
+        return new Fragment_Categories();
     }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_appoinments,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories,container,false);
         initView();
         return binding.getRoot();
     }

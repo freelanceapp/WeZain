@@ -78,6 +78,8 @@
             app:menu="@menu/menu"
             app:itemIconTint="@drawable/item_nav_bg"
             app:itemIconSize="20dp"
+            app:itemTextAppearance="@style/RobotoTextViewStyle"
+
             app:labelVisibilityMode="labeled"
             app:itemTextAppearanceActive="@style/active"
             app:itemTextAppearanceInactive="@style/active"

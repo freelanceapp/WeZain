@@ -15,21 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.wezain.R;
-import com.wezain.databinding.FragmentConsultingBinding;
+import com.wezain.databinding.FragmentOffersBinding;
 import com.wezain.ui.activity_home.HomeActivity;
 
-import java.util.ArrayList;
-
-public class Fragment_Consulting extends Fragment {
-    private FragmentConsultingBinding binding;
+public class Fragment_Offers extends Fragment {
+    private FragmentOffersBinding binding;
     private HomeActivity activity;
-    public static Fragment_Consulting newInstance(){
-        return new Fragment_Consulting();
+    public static Fragment_Offers newInstance(){
+        return new Fragment_Offers();
     }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_consulting,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_offers,container,false);
         initView();
         return binding.getRoot();
     }

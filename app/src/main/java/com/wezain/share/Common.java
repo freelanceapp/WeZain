@@ -22,8 +22,8 @@ import android.widget.ProgressBar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
-import com.doctory_client.R;
-import com.doctory_client.databinding.DialogAlertBinding;
+import com.wezain.R;
+import com.wezain.databinding.DialogAlertBinding;
 
 import java.io.File;
 

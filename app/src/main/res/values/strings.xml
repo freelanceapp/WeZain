@@ -29,6 +29,17 @@
     <string name="select_image_to_upload">Select Image to Upload</string>
     <string name="choose_language"><![CDATA[Choose <font color="#F61C00">Language</font>]]></string>
     <string name="no_data_to_show">No Data To Show</string>
+    <string name="categories">Category</string>
+    <string name="offers">Offers</string>
+    <string name="orders">Orders</string>
+    <string name="profile">Profile</string>
+    <string name="please_enter_code_sent_to">Please enter code sent to</string>
+    <string name="resend">Resend</string>
+    <string name="resend2">Resend</string>
+    <string name="inv_code">Invalid Code</string>
+    <string name="ok">Ok</string>
+    <string name="favorite_offers">Favorite Offers</string>
+    <string name="show_all">Show All</string>
     <string name="phone">phone</string>
     <string name="or">Or</string>
     <string name="google">Google</string>

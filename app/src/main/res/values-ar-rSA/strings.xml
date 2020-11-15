@@ -34,5 +34,15 @@
     <string name="or">Or</string>
     <string name="google">جوجل</string>
     <string name="facebook">فيس بوك</string>
-
+    <string name="categories">الأقسام</string>
+    <string name="offers">العروض</string>
+    <string name="orders">طلباتى</string>
+    <string name="profile">الصفحة الشخصية</string>
+    <string name="please_enter_code_sent_to">من فضلك ادخل الكود المرسل الى</string>
+    <string name="resend">اعد إرسال فى</string>
+    <string name="resend2">اعد الارسال</string>
+    <string name="inv_code">الكود غير صحيح</string>
+    <string name="ok">حسنا</string>
+    <string name="favorite_offers">عروضنا المفضلة</string>
+    <string name="show_all">عرض الكل</string>
 </resources>

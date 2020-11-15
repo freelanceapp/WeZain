@@ -10,19 +10,19 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.doctory_client.R;
-import com.doctory_client.databinding.FragmentMedicineBinding;
+import com.wezain.R;
+import com.wezain.databinding.FragmentOrdersBinding;
 
-public class Fragment_Medicine extends Fragment {
-    private FragmentMedicineBinding binding;
+public class Fragment_Orders extends Fragment {
+    private FragmentOrdersBinding binding;
 
-    public static Fragment_Medicine newInstance(){
-        return new Fragment_Medicine();
+    public static Fragment_Orders newInstance(){
+        return new Fragment_Orders();
     }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_medicine,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_orders,container,false);
         initView();
         return binding.getRoot();
     }

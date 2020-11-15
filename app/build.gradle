@@ -68,4 +68,6 @@ dependencies {
     implementation 'com.github.FlyingPumba:SimpleRatingBar:v0.1.5'
     implementation 'com.facebook.android:facebook-login:[5,6)'
 
+    implementation 'com.chaos.view:pinview:1.4.3'
+
 }

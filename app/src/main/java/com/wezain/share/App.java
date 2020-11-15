@@ -5,7 +5,7 @@ import android.content.Context;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.doctory_client.language.Language;
+import com.wezain.language.Language;
 
 
 public class App extends MultiDexApplication {
@@ -19,6 +19,12 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        TypefaceUtil.setDefaultFont(this, "DEFAULT", "fonts/Tajawal-Regular.ttf");
+        TypefaceUtil.setDefaultFont(this, "MONOSPACE", "fonts/Tajawal-Regular.ttf");
+        TypefaceUtil.setDefaultFont(this, "SERIF", "fonts/Tajawal-Regular.ttf");
+        TypefaceUtil.setDefaultFont(this, "SANS_SERIF", "fonts/Tajawal-Regular.ttf");
+
     }
+
 }
 

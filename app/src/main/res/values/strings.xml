@@ -57,5 +57,6 @@
     <string name="discount">Discount</string>
     <string name="fast">Fast</string>
     <string name="no_orders_to_show">No Orders To Show</string>
+    <string name="most_seller">الأكثر مبيعا</string>
 
 </resources>

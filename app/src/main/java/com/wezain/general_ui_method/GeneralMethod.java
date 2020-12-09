@@ -34,13 +34,6 @@ public class GeneralMethod {
         }
     }
 
-
-
-
-
-
-
-
     @BindingAdapter("image")
     public static void image(View view, String endPoint) {
         if (view instanceof CircleImageView) {

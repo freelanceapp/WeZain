@@ -25,6 +25,7 @@ import com.wezain.mvp.activity_splash_mvp.SplashView;
 import com.wezain.preferences.Preferences;
 import com.wezain.ui.activity_home.HomeActivity;
 import com.wezain.ui.activity_language.LanguageActivity;
+import com.wezain.ui.activity_login.LoginActivity;
 
 import io.paperdb.Paper;
 
@@ -65,14 +66,14 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
 
     @Override
     public void onNavigateToLanguageActivity() {
-      //  ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, binding.logo, binding.logo.getTransitionName());
-       // Intent intent = new Intent(this, LanguageActivity.class);
-       // startActivityForResult(intent,100,optionsCompat.toBundle());
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
     public void onNavigateToLocationActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

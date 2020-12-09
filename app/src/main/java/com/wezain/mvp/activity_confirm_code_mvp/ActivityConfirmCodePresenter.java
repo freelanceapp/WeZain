@@ -37,10 +37,10 @@ public class ActivityConfirmCodePresenter {
         this.phone = phone;
         this.phone_code = phone_code;
         activity = (ConfirmCodeActivity) context;
-        mAuth = FirebaseAuth.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
         Paper.init(context);
         lang = Paper.book().read("lang", "ar");
-        sendSmsCode();
+        //sendSmsCode();
     }
 
     public void sendSmsCode()
@@ -150,7 +150,7 @@ public class ActivityConfirmCodePresenter {
         if (countDownTimer != null) {
             countDownTimer.start();
         }
-        sendSmsCode();
+        //sendSmsCode();
     }
     public void stopTimer()
     {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,6 +16,7 @@ import com.wezain.language.Language;
 import com.wezain.models.LoginModel;
 import com.wezain.mvp.activity_login_presenter.ActivityLoginPresenter;
 import com.wezain.mvp.activity_login_presenter.ActivityLoginView;
+import com.wezain.ui.activity_confirm_code.ConfirmCodeActivity;
 import com.wezain.ui.activity_home.HomeActivity;
 import com.wezain.ui.activity_sign_up.SignUpActivity;
 
@@ -51,13 +53,14 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
         binding.setModel(model);
         presenter = new ActivityLoginPresenter(this,this);
         binding.btnLogin.setOnClickListener(view -> {
-            presenter.checkData(model);
+           // presenter.checkData(model);
+            Intent intent =new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
         });
 
         binding.tvSkip.setOnClickListener(view -> {
             Intent intent = new Intent(this, HomeActivity.class);
-            intent.putExtra("lat",lat);
-            intent.putExtra("lng",lng);
+
             startActivity(intent);
             finish();
         });
@@ -68,8 +71,6 @@ public class LoginActivity extends AppCompatActivity implements ActivityLoginVie
         Intent intent = new Intent(this, SignUpActivity.class);
         intent.putExtra("phone_code",model.getPhone_code());
         intent.putExtra("phone",model.getPhone());
-        intent.putExtra("lat",lat);
-        intent.putExtra("lng",lng);
         startActivity(intent);
         finish();
 

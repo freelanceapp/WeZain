@@ -30,8 +30,8 @@
     <string name="select_image_to_upload">إختر صورة لرفعها</string>
     <string name="choose_language"><![CDATA[إختر <font color="#F61C00">اللغة</font>]]></string>
     <string name="no_data_to_show">لا توجد اقسام لعرضها</string>
-    <string name="phone">phone</string>
-    <string name="or">Or</string>
+    <string name="phone">رقم الجوال</string>
+    <string name="or">أو</string>
     <string name="google">جوجل</string>
     <string name="facebook">فيس بوك</string>
     <string name="categories">الأقسام</string>
@@ -49,13 +49,15 @@
     <string name="fast">السريعة</string>
     <string name="my_profile">حسابى</string>
     <string name="my_orders">طلباتى</string>
-    <string name="favourite">المفضله</string>
-    <string name="addresses">العنواين</string>
-    <string name="setting">الاعدادات</string>
-    <string name="country">الدوله</string>
-    <string name="language">اللغه</string>
-    <string name="contact_us">الاتصال بنا</string>
-    <string name="helping">مساعدة</string>
-    <string name="contact_us2">تواصل معنا</string>
+    <string name="favourite">المفضلة</string>
+    <string name="addresses">العناوين</string>
+    <string name="setting">الأعدادات</string>
+    <string name="country">البلد</string>
+    <string name="language">اللغة</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="helping">المساعدة</string>
+    <string name="contact_us2">الأتصال بنا</string>
+
     <string name="no_orders_to_show">لا يوجد طلبات لعرضها</string>
+    <string name="most_seller">الأكثر مبيعا</string>
 </resources>

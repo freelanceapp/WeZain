@@ -35,7 +35,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/ic_nav_user"
+            android:src="@drawable/image_avatar"
             app:civ_border_color="@color/color1"
             app:civ_border_width="1dp"
             />
@@ -45,7 +45,7 @@
             android:textColor="@color/gray9"
             android:textSize="15sp"
             android:layout_gravity="center"
-            android:text="ahmed"
+            android:text="محمد"
             android:textStyle="bold"
             android:background="@color/transparent"
             android:gravity="center_vertical"
@@ -73,6 +73,7 @@
                 <View
                     android:layout_width="2dp"
                     android:layout_height="45dp"
+                    android:padding="10dp"
                     android:background="@color/color1"
                     />
                 <TextView
@@ -227,6 +228,8 @@
                 <View
                     android:layout_width="2dp"
                     android:layout_height="45dp"
+                    android:padding="10dp"
+
                     android:background="@color/color1"
                     />
                 <TextView
@@ -359,6 +362,7 @@
                 <View
                     android:layout_width="2dp"
                     android:layout_height="45dp"
+                    android:padding="10dp"
                     android:background="@color/color1"
                     />
                 <TextView
@@ -473,8 +477,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:padding="3dp"
                     android:src="@drawable/ic_logout"
                     android:tint="@color/color1"

@@ -62,6 +62,9 @@ public class Fragment_Home extends Fragment {
         binding.recViewAccessories.setAdapter(auctionAdapter);
         binding.recViewFavoriteOffers.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
         binding.recViewFavoriteOffers.setAdapter(auctionAdapter);
+        binding.recViewMostSeller.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
+        binding.recViewMostSeller.setAdapter(auctionAdapter);
+
         SliderAdapter sliderAdapter = new SliderAdapter(new ArrayList<>(), activity);
         binding.tab.setupWithViewPager(binding.pager);
         binding.pager.setAdapter(sliderAdapter);

@@ -76,4 +76,5 @@
     <string name="confirm_address">Confirm Address</string>
     <string name="update_address">Update Address</string>
     <string name="add_to_cart">Add To Cart</string>
+    <string name="pls_signin_signup">Please Sign Or Signup</string>
 </resources>

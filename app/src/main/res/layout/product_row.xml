@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-
-
         <variable
-            name="lang"
+            name="model"
+            type="com.wezain.models.ProductModel" />
+        <variable
+            name="country"
             type="String" />
+
 
         <import type="android.view.View" />
     </data>
@@ -26,7 +27,7 @@
         app:contentPadding="5dp">
 
         <FrameLayout
-            android:layout_width="160dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content">
 
             <LinearLayout
@@ -36,120 +37,88 @@
                 android:layout_marginEnd="5dp"
                 android:orientation="vertical">
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-                    <CheckBox
-                        android:id="@+id/checkbox"
+                        <CheckBox
+                            android:id="@+id/checkbox"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_margin="5dp"
+                            android:button="@drawable/checkbox_bg"
+                            android:checked="@{model.product_likes==null?false:true}"
+
+                            />
+
+
+
+
+                    </FrameLayout>
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:button="@drawable/checkbox_bg"
-
+                        android:background="@drawable/rounded_red"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:visibility='@{model.have_offer.equals("with_offer")?View.VISIBLE:View.GONE}'
+                        android:text='@{model.offer_type.equals("rate")?model.offer_value+"%":(model.offer_value+(country.equals("eg")?@string/tl:@string/aed))}'
 
                         />
+                </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:background="@drawable/btn_change_lang"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="3dp"
-                        android:paddingRight="5dp"
-                        android:paddingBottom="3dp"
-                        android:visibility="visible"
-
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/discount"
-                            android:textColor="@color/white"
-                            android:textSize="9sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="10%"
-                            android:textColor="@color/white"
-                            android:textSize="9sp" />
-
-                    </LinearLayout>
-
-
-
-                </FrameLayout>
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:src="@drawable/product"
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:layout_gravity="center_horizontal"
-                    app:civ_border_width="0dp"
-                    app:civ_circle_background_color="@color/white" />
+                    image="@{model.main_image}"
+                    />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:ellipsize="end"
                     android:gravity="center"
-                    android:maxLines="2"
-                    android:text="كاميرا مراقبه"
+                    android:lines="2"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:text="@{model.title}"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:text='@{model.price+" "+(country.equals("eg")?@string/tl:@string/aed)}'
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    />
 
 
-                    <TextView
-                        android:id="@+id/tvOldprice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="3dp"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:singleLine="true"
-                        android:text='160 ر.س'
-                        android:textColor="@color/gray6"
-                        android:textSize="15sp"
-                        android:visibility="visible"
-
-                        />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:text='150 ر.س'
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-
-
-
-                <View
-                    android:id="@+id/View"
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:visibility="gone"
-                    android:background="@color/colorPrimary" />
 
 
             </LinearLayout>

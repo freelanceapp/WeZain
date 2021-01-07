@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.wezain.R;
-import com.wezain.adapters.DataAdapter;
 import com.wezain.adapters.OfferAdapter;
 import com.wezain.databinding.FragmentOffersBinding;
 import com.wezain.models.BankDataModel;

@@ -38,7 +38,7 @@
     <string name="resend2">Resend</string>
     <string name="inv_code">Invalid Code</string>
     <string name="ok">Ok</string>
-    <string name="favorite_offers">Favorite Offers</string>
+    <string name="favorite_offers">Flash sale</string>
     <string name="show_all">Show All</string>
     <string name="phone">phone</string>
     <string name="or">Or</string>
@@ -57,6 +57,10 @@
     <string name="discount">Discount</string>
     <string name="fast">Fast</string>
     <string name="no_orders_to_show">No Orders To Show</string>
-    <string name="most_seller">الأكثر مبيعا</string>
+    <string name="most_seller">Recommended</string>
+    <string name="something">Check internet connection</string>
+    <string name="upcoming_products">New products</string>
+    <string name="aed">AED</string>
+    <string name="tl">TL</string>
 
 </resources>

@@ -64,7 +64,7 @@ public class ActivityHomePresenter {
     }
     private void displayFragmentHome(){
         if (fragment_home==null){
-            fragment_home = Fragment_Home.newInstance(lat,lng);
+            fragment_home = Fragment_Home.newInstance();
         }
 
         if (fragment_categories !=null&& fragment_categories.isAdded()){

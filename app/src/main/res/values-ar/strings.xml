@@ -29,7 +29,7 @@
     <string name="upload_image">رفع صورة</string>
     <string name="select_image_to_upload">إختر صورة لرفعها</string>
     <string name="choose_language"><![CDATA[إختر <font color="#F61C00">اللغة</font>]]></string>
-    <string name="no_data_to_show">لا توجد اقسام لعرضها</string>
+    <string name="no_data_to_show">لا توجد عناصر لعرضها</string>
     <string name="phone">رقم الجوال</string>
     <string name="or">أو</string>
     <string name="google">جوجل</string>
@@ -43,7 +43,7 @@
     <string name="resend2">اعد الارسال</string>
     <string name="inv_code">الكود غير صحيح</string>
     <string name="ok">حسنا</string>
-    <string name="favorite_offers">عروضنا المفضلة</string>
+    <string name="favorite_offers">فلاش سيل</string>
     <string name="show_all">عرض الكل</string>
     <string name="discount">خصم</string>
     <string name="fast">السريعة</string>
@@ -59,5 +59,9 @@
     <string name="contact_us2">الأتصال بنا</string>
 
     <string name="no_orders_to_show">لا يوجد طلبات لعرضها</string>
-    <string name="most_seller">الأكثر مبيعا</string>
+    <string name="most_seller">منتجات موصى بها</string>
+    <string name="something">تحقق من الاتصال بالانترنت</string>
+    <string name="upcoming_products">منتجات جديدة</string>
+    <string name="aed">درهم</string>
+    <string name="tl">ليرة</string>
 </resources>

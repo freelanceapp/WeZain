@@ -2,6 +2,7 @@ package com.wezain.services;
 
 
 import com.wezain.models.CategoryDataModel;
+import com.wezain.models.MainCategoryDataModel;
 import com.wezain.models.MainSliderImageDataModel;
 import com.wezain.models.ProductDataModel;
 import com.wezain.models.ProductModel;
@@ -36,5 +37,19 @@ public interface Service {
                                              @Query("product_type") String product_type,
                                              @Query("user_id") String user_id
                                            );
+    @GET("api/Get-departments")
+    Call<MainCategoryDataModel> getCategorywithsub(@Query("lang") String lang,
+                                                   @Query("country") String country);
+    @GET("api/Get-products-by-department-id")
+    Call<ProductDataModel> getProducts(@Query("lang") String lang,
+                                       @Query("country") String country,
+                                       @Query("department_type") String department_type,
+                                       @Query("department_id") String department_id,
+                                       @Query("user_id") String user_id,
+                                       @Query("pagination_status")String pagination_status
+
+
+
+    );
 
 }

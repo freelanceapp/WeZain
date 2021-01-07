@@ -57,11 +57,11 @@
     <string name="contact_us">تواصل معنا</string>
     <string name="helping">المساعدة</string>
     <string name="contact_us2">الأتصال بنا</string>
-
     <string name="no_orders_to_show">لا يوجد طلبات لعرضها</string>
     <string name="most_seller">منتجات موصى بها</string>
     <string name="something">تحقق من الاتصال بالانترنت</string>
     <string name="upcoming_products">منتجات جديدة</string>
     <string name="aed">درهم</string>
     <string name="tl">ليرة</string>
+    <string name="departments">الاقسام</string>
 </resources>

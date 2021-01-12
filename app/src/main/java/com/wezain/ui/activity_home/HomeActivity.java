@@ -105,6 +105,11 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
 
     }
 
+    public void displayFragmentCategory(int selectedPos){
+        presenter.displayFragmentCategories(selectedPos);
+
+    }
+
     @Override
     public void onFinished() {
         finish();

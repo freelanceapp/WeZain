@@ -80,6 +80,8 @@ public class Fragment_Home extends Fragment {
         Paper.init(activity);
         lang = Paper.book().read("lang", "ar");
         country = Paper.book().read("country", "eg");
+
+
         sliderModelList = new ArrayList<>();
         categoryModelList = new ArrayList<>();
         flashProductModelList = new ArrayList<>();
@@ -556,6 +558,10 @@ public class Fragment_Home extends Fragment {
             TimerTask task = new MyTimerTask();
             timer.scheduleAtFixedRate(task, 6000, 6000);
         }
+    }
+
+    public void setCategorySelected(int selectedPos) {
+        activity.displayFragmentCategory(selectedPos);
     }
 
 

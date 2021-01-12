@@ -27,16 +27,13 @@ public class ActivityHomePresenter {
     private Fragment_Profile fragment_profile;
     private Preferences preference;
     private UserModel userModel;
-    private double lat=0.0,lng=0.0;
-
+    private int selectedPos = 0;
     public ActivityHomePresenter(Context context, HomeActivityView view, FragmentManager fragmentManager, double lat, double lng) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.view = view;
         preference = Preferences.getInstance();
         userModel = preference.getUserData(context);
-        this.lat = lat;
-        this.lng = lng;
         displayFragmentHome();
     }
 
@@ -45,7 +42,7 @@ public class ActivityHomePresenter {
         int id = item.getItemId();
         switch (id){
             case R.id.categories :
-                displayFragmentCategories();
+                displayFragmentCategories(selectedPos);
                 break;
             case R.id.offers :
                 displayFragmentOffers();
@@ -89,9 +86,10 @@ public class ActivityHomePresenter {
         }
     }
 
-    private void displayFragmentCategories(){
+    public void displayFragmentCategories(int selectedPos){
+        this.selectedPos = selectedPos;
         if (fragment_categories ==null){
-            fragment_categories = Fragment_Categories.newInstance();
+            fragment_categories = Fragment_Categories.newInstance(selectedPos);
         }
 
         if (fragment_home!=null&&fragment_home.isAdded()){
@@ -110,6 +108,7 @@ public class ActivityHomePresenter {
         }
 
         if (fragment_categories.isAdded()){
+            fragment_categories.updateSelectedPos(selectedPos);
             fragmentManager.beginTransaction().show(fragment_categories).commit();
         }else {
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_categories,"fragment_appointment").commit();

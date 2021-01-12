@@ -43,7 +43,9 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         holder.binding.setModel(list.get(position));
 
-
+        holder.itemView.setOnClickListener(view -> {
+            fragment_home.setCategorySelected(holder.getAdapterPosition());
+        });
     }
 
     @Override

@@ -168,6 +168,8 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             if (response.code() == 500) {
                                 Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            }else if(response.code()==422){
+                                Toast.makeText(SignUpActivity.this, R.string.em_ph_exist, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
@@ -217,8 +219,8 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             if (response.code() == 500) {
                                 Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-                            }else if (response.code()==422){
-                                Toast.makeText(SignUpActivity.this, R.string.email_phone_not_exist, Toast.LENGTH_SHORT).show();
+                            }else if(response.code()==422){
+                                Toast.makeText(SignUpActivity.this, R.string.em_ph_exist, Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }

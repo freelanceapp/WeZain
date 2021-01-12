@@ -71,7 +71,8 @@
     <string name="country_code">Country Code</string>
     <string name="uae">UAE</string>
     <string name="turkey">Turkey</string>
-    <string name="user_not_exist">User  not exist</string>
-    <string name="email_phone_not_exist">Email or phone is exist</string>
+    <string name="departments">Departments</string>
+    <string name="em_ph_exist">Email or phone is exist</string>
+    <string name="user_not_exist">User is not exist</string>
 
 </resources>

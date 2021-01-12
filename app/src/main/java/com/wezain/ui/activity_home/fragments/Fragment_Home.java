@@ -83,17 +83,7 @@ public class Fragment_Home extends Fragment {
         userModel = preferences.getUserData(activity);
         Paper.init(activity);
         lang = Paper.book().read("lang", "ar");
-        if (userModel==null){
-            country = Paper.book().read("country", "eg");
-        }else {
-            if (userModel.getData().getPhone_code().equals("+971")){
-                country = Paper.book().read("country", "em");
-
-            }else {
-                country = Paper.book().read("country", "eg");
-
-            }
-        }
+        country = Paper.book().read("country", "eg");
         sliderModelList = new ArrayList<>();
         categoryModelList = new ArrayList<>();
         flashProductModelList = new ArrayList<>();

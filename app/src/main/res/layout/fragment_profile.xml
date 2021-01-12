@@ -5,6 +5,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="actions"
+            type="com.wezain.interfaces.Listeners.ProfileActions" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -152,6 +155,8 @@
                     android:layout_marginEnd="15dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:onClick="@{()->actions.onFavorite()}"
+
                     >
 
                     <ImageView
@@ -191,6 +196,8 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->actions.onAddress()}"
+
                         >
 
                         <ImageView

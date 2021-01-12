@@ -73,6 +73,7 @@
     <string name="country_code">كود الدولة</string>
     <string name="uae">الإمارات العربية المتحدة</string>
     <string name="turkey">تركيا</string>
+    <string name="departments">الاقسام</string>
+    <string name="em_ph_exist">البريد الالكتروني او رقم الجوال موجود من قبل</string>
     <string name="user_not_exist">المستخدم غير موجود</string>
-    <string name="email_phone_not_exist">البريد الالكتروني او رقم الجوال موجود من قبل</string>
 </resources>

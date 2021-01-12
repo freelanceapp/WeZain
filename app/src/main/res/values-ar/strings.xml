@@ -11,7 +11,7 @@
     <string name="logout">خروج</string>
     <string name="about_app">عن التطبيق</string>
     <string name="notifications">الإشعارات</string>
-    <string name="wait">انتظر</string>
+    <string name="wait">انتظر قليلا...</string>
     <string name="home">الرئيسية</string>
     <string name="next">التالي</string>
     <string name="login">تسجيل الدخول</string>
@@ -76,4 +76,5 @@
     <string name="departments">الاقسام</string>
     <string name="em_ph_exist">البريد الالكتروني او رقم الجوال موجود من قبل</string>
     <string name="user_not_exist">المستخدم غير موجود</string>
+    <string name="search">بحث</string>
 </resources>

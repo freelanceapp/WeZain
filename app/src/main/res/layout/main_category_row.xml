@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.wezain.models.DepartmentModel" />
+            type="com.wezain.models.MainDepartmentModel" />
 
         <variable
             name="lang"

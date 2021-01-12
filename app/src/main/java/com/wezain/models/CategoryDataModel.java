@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CategoryDataModel implements Serializable {
-    private List<DepartmentModel> data;
-
-    public List<DepartmentModel> getData() {
+    private List<MainDepartmentModel> data;
+    public List<MainDepartmentModel> getData() {
         return data;
     }
 }

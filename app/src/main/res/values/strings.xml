@@ -10,7 +10,7 @@
     <string name="logout">Logout</string>
     <string name="about_app">About App</string>
     <string name="notifications">Notifications</string>
-    <string name="wait">Wait</string>
+    <string name="wait">Wait...</string>
     <string name="home">Home</string>
     <string name="next">Next</string>
     <string name="login">Log In</string>
@@ -74,5 +74,6 @@
     <string name="departments">Departments</string>
     <string name="em_ph_exist">Email or phone is exist</string>
     <string name="user_not_exist">User is not exist</string>
+    <string name="search">Search...</string>
 
 </resources>

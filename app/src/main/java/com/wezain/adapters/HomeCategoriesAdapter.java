@@ -11,19 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wezain.R;
 import com.wezain.databinding.MainCategoryRowBinding;
-import com.wezain.models.DepartmentModel;
+import com.wezain.models.MainDepartmentModel;
 import com.wezain.ui.activity_home.fragments.Fragment_Home;
 
 import java.util.List;
 
 public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAdapter.MyHolder> {
 
-    private List<DepartmentModel> list;
+    private List<MainDepartmentModel> list;
     private Context context;
     private int i = -1;
     private Fragment_Home fragment_home;
 
-    public HomeCategoriesAdapter(List<DepartmentModel> list, Context context, Fragment_Home fragment_home) {
+    public HomeCategoriesAdapter(List<MainDepartmentModel> list, Context context, Fragment_Home fragment_home) {
         this.list = list;
         this.context = context;
         this.fragment_home = fragment_home;

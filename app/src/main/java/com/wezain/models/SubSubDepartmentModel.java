@@ -2,11 +2,11 @@ package com.wezain.models;
 
 import java.io.Serializable;
 
-public class DepartmentModel implements Serializable {
+public class SubSubDepartmentModel implements Serializable {
     private int id;
     private String title;
     private String icon;
-    private String basic_department_id;
+    private String parent;
 
     public int getId() {
         return id;
@@ -20,7 +20,7 @@ public class DepartmentModel implements Serializable {
         return icon;
     }
 
-    public String getBasic_department_id() {
-        return basic_department_id;
+    public String getParent() {
+        return parent;
     }
 }

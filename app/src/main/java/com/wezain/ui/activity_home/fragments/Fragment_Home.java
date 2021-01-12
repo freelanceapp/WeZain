@@ -1,9 +1,7 @@
 package com.wezain.ui.activity_home.fragments;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.wezain.R;
@@ -24,9 +21,8 @@ import com.wezain.adapters.HomeProductAdapter;
 import com.wezain.adapters.SliderAdapter;
 import com.wezain.databinding.FragmentHomeBinding;
 
-import com.wezain.models.BankDataModel;
 import com.wezain.models.CategoryDataModel;
-import com.wezain.models.DepartmentModel;
+import com.wezain.models.MainDepartmentModel;
 import com.wezain.models.MainSliderImageDataModel;
 import com.wezain.models.ProductModel;
 import com.wezain.models.SliderDataModel;
@@ -55,7 +51,7 @@ public class Fragment_Home extends Fragment {
     private SliderAdapter sliderAdapter;
     private List<SliderModel> sliderModelList;
     private HomeCategoriesAdapter homeCategoriesAdapter;
-    private List<DepartmentModel>  categoryModelList;
+    private List<MainDepartmentModel>  categoryModelList;
     private HomeProductAdapter flashProductAdapter,newProductAdapter,recommendedProductAdapter;
     private List<ProductModel> flashProductModelList,newProductModelList,recommendedProductModelList;
     private Preferences preferences;

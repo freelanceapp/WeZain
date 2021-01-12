@@ -62,19 +62,16 @@
     <string name="upcoming_products">New products</string>
     <string name="aed">AED</string>
     <string name="tl">TL</string>
-    <string name="departments">Departments</string>
-    <string name="address_details">Address Detials</string>
-    <string name="add_address">Add Address</string>
-    <string name="determine_address">DeterMind Address</string>
-    <string name="addition_details">Addition Detials</string>
-    <string name="address_name">Address Name</string>
-    <string name="homee" />
-    <string name="work">Work</string>
-    <string name="address">Address</string>
-    <string name="select_the_address">Select The Address</string>
-    <string name="confirm_address">Confirm Address</string>
-    <string name="update_address">Update Address</string>
-    <string name="add_to_cart">Add To Cart</string>
-    <string name="pls_signin_signup">Please Sign Or Signup</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="inv_email">Invalid email</string>
+    <string name="password_short">Password is too short</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="country_code">Country Code</string>
+    <string name="uae">UAE</string>
+    <string name="turkey">Turkey</string>
+    <string name="user_not_exist">User  not exist</string>
+    <string name="email_phone_not_exist">Email or phone is exist</string>
 
 </resources>

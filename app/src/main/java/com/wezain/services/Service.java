@@ -1,42 +1,27 @@
 package com.wezain.services;
 
 
-import com.wezain.models.AddFavoriteDataModel;
-import com.wezain.models.AddressDataModel;
 import com.wezain.models.CategoryDataModel;
-import com.wezain.models.MainCategoryDataModel;
 import com.wezain.models.MainSliderImageDataModel;
-import com.wezain.models.PlaceGeocodeData;
-import com.wezain.models.PlaceMapDetailsData;
 import com.wezain.models.ProductDataModel;
 import com.wezain.models.ProductModel;
 import com.wezain.models.SliderDataModel;
+import com.wezain.models.UserModel;
 
 import java.util.List;
 
-import okhttp3.ResponseBody;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface Service {
-    @GET("place/findplacefromtext/json")
-    Call<PlaceMapDetailsData> searchOnMap(@Query(value = "inputtype") String inputtype,
-                                          @Query(value = "input") String input,
-                                          @Query(value = "fields") String fields,
-                                          @Query(value = "language") String language,
-                                          @Query(value = "key") String key
-    );
-
-    @GET("geocode/json")
-    Call<PlaceGeocodeData> getGeoData(@Query(value = "latlng") String latlng,
-                                      @Query(value = "language") String language,
-                                      @Query(value = "key") String key);
-
     @GET("api/get-offers")
     Call<SliderDataModel> getSlider(@Query("lang") String lang,
                                     @Query("country") String country,
@@ -58,69 +43,34 @@ public interface Service {
                                              @Query("country") String country,
                                              @Query("product_type") String product_type,
                                              @Query("user_id") String user_id
-                                           );
-    @GET("api/Get-departments")
-    Call<MainCategoryDataModel> getCategorywithsub(@Query("lang") String lang,
-                                                   @Query("country") String country);
-    @GET("api/Get-products-by-department-id")
-    Call<ProductDataModel> getProducts(@Query("lang") String lang,
-                                       @Query("country") String country,
-                                       @Query("department_type") String department_type,
-                                       @Query("department_id") String department_id,
-                                       @Query("user_id") String user_id,
-                                       @Query("pagination_status")String pagination_status
-
-
-
-    );
-    @FormUrlEncoded
-    @POST("api/action-wishlists")
-    Call<AddFavoriteDataModel> add_remove_favorite(@Header("Authorization") String token,
-                                                   @Field("user_id") String user_id,
-                                                   @Field("product_id") String product_id
-    );
-
-    @GET("api/my-wishlists")
-    Call<ProductDataModel> getMyFavorite(@Header("Authorization") String token,
-                                         @Query("user_id") String user_id
-    );
-
-    @GET("api/my-address")
-    Call<AddressDataModel> getMyAddress(@Header("Authorization") String token,
-                                        @Query("user_id") String user_id
-    );
-
-
-    @FormUrlEncoded
-    @POST("api/add-address")
-    Call<ResponseBody> addAddress(@Header("Authorization") String token,
-                                  @Field("user_id") String user_id,
-                                  @Field("phone") String phone,
-                                  @Field("name") String name,
-                                  @Field("address") String address,
-                                  @Field("google_lat") double google_lat,
-                                  @Field("google_long") double google_long,
-                                  @Field("type") String type
     );
 
     @FormUrlEncoded
-    @POST("api/edit-address")
-    Call<ResponseBody> updateAddress(@Header("Authorization") String token,
-                                     @Field("id") String address_id,
-                                     @Field("user_id") String user_id,
-                                     @Field("phone") String phone,
-                                     @Field("name") String name,
-                                     @Field("address") String address,
-                                     @Field("google_lat") double google_lat,
-                                     @Field("google_long") double google_long,
-                                     @Field("type") String type
+    @POST("api/login")
+    Call<UserModel> login(@Field("email") String email,
+                          @Field("password") String password
     );
 
     @FormUrlEncoded
-    @POST("api/delete-address")
-    Call<ResponseBody> deleteAddress(@Header("Authorization") String token,
-                                     @Field("id") String address_id
+    @POST("api/register")
+    Call<UserModel> signUpWithoutImage(@Field("first_name") String first_name,
+                                       @Field("last_name") String last_name,
+                                       @Field("phone_code") String phone_code,
+                                       @Field("phone") String phone,
+                                       @Field("email") String email,
+                                       @Field("password") String password
     );
 
+
+    @Multipart
+    @POST("api/register")
+    Call<UserModel> signUpWithImage(@Part("first_name") RequestBody first_name,
+                                    @Part("last_name") RequestBody last_name,
+                                    @Part("phone_code") RequestBody phone_code,
+                                    @Part("phone") RequestBody phone,
+                                    @Part("email") RequestBody email,
+                                    @Part("password") RequestBody password,
+                                    @Part MultipartBody.Part logo
+    );
 
 }

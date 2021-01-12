@@ -41,8 +41,8 @@ public class Fragment_Orders extends Fragment {
     private void initView() {
         activity = (HomeActivity) getActivity();
 
-//        auctionAdapter = new BrandAdapter( new ArrayList<BankDataModel.BankModel>(),activity);
-//        binding.recViewOrders.setLayoutManager(new GridLayoutManager(activity,3));
-//        binding.recViewOrders.setAdapter(auctionAdapter);
+        auctionAdapter = new BrandAdapter( new ArrayList<BankDataModel.BankModel>(),activity);
+        binding.recViewOrders.setLayoutManager(new GridLayoutManager(activity,3));
+        binding.recViewOrders.setAdapter(auctionAdapter);
     }
 }

@@ -57,24 +57,22 @@
     <string name="contact_us">تواصل معنا</string>
     <string name="helping">المساعدة</string>
     <string name="contact_us2">الأتصال بنا</string>
+
     <string name="no_orders_to_show">لا يوجد طلبات لعرضها</string>
     <string name="most_seller">منتجات موصى بها</string>
     <string name="something">تحقق من الاتصال بالانترنت</string>
     <string name="upcoming_products">منتجات جديدة</string>
     <string name="aed">درهم</string>
     <string name="tl">ليرة</string>
-    <string name="departments">الاقسام</string>
-    <string name="address_details">Address Detials</string>
-    <string name="add_address">Add Address</string>
-    <string name="determine_address">DeterMind Address</string>
-    <string name="addition_details">Addition Detials</string>
-    <string name="address_name">Address Name</string>
-    <string name="homee" />
-    <string name="work">Work</string>
-    <string name="address">Address</string>
-    <string name="select_the_address">Select The Address</string>
-    <string name="confirm_address">Confirm Address</string>
-    <string name="update_address">Update Address</string>
-    <string name="add_to_cart">Add To Cart</string>
-    <string name="pls_signin_signup">Please Sign Or Signup</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="password">كلمة المرور</string>
+    <string name="inv_email">البريد الاكتروني غير صحيح</string>
+    <string name="password_short">كلمة المرور قصيرة جدا</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="last_name">إسم العائلة</string>
+    <string name="country_code">كود الدولة</string>
+    <string name="uae">الإمارات العربية المتحدة</string>
+    <string name="turkey">تركيا</string>
+    <string name="user_not_exist">المستخدم غير موجود</string>
+    <string name="email_phone_not_exist">البريد الالكتروني او رقم الجوال موجود من قبل</string>
 </resources>

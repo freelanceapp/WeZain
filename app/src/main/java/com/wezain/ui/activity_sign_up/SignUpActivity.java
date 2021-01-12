@@ -3,6 +3,7 @@ package com.wezain.ui.activity_sign_up;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,88 +29,231 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.squareup.picasso.Picasso;
 import com.wezain.R;
+import com.wezain.adapters.CountriesAdapter;
 import com.wezain.databinding.ActivitySignUpBinding;
+import com.wezain.databinding.DialogCountriesBinding;
 import com.wezain.databinding.DialogSelectImageBinding;
 import com.wezain.language.Language;
+import com.wezain.models.CountryCodeModel;
 import com.wezain.models.SignUpModel;
-import com.wezain.mvp.activity_sign_up_mvp.ActivitySignUpPresenter;
-import com.wezain.mvp.activity_sign_up_mvp.ActivitySignUpView;
+import com.wezain.models.UserModel;
+import com.wezain.preferences.Preferences;
+import com.wezain.remote.Api;
 import com.wezain.share.Common;
+import com.wezain.tags.Tags;
+import com.wezain.ui.activity_home.HomeActivity;
+import com.wezain.ui.activity_login.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.paperdb.Paper;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class SignUpActivity extends AppCompatActivity implements ActivitySignUpView {
+public class SignUpActivity extends AppCompatActivity {
     private ActivitySignUpBinding binding;
-    private String phone="",phone_code ="";
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int READ_REQ = 1, CAMERA_REQ = 2;
     private Uri uri = null;
-    private List<String> genderList;
-    private List<String> bloodList;
-    private SpinnerAdapter genderAdapter,bloodAdapter;
-    private ActivitySignUpPresenter presenter;
     private SignUpModel model;
-
-    private  AlertDialog dialog;
-    private double lat=0.0,lng=0.0;
+    private AlertDialog dialog;
+    private Preferences preferences;
+    private CountriesAdapter adapter;
+    private AlertDialog dialog2;
+    private List<CountryCodeModel> countryCodeModelList;
 
     @Override
-    protected void attachBaseContext(Context newBase)
-    {
+    protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language.updateResources(newBase, Paper.book().read("lang", "ar")));
     }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
-        getDataFromIntent();
         initView();
 
     }
-    private void getDataFromIntent()
-    {
-        Intent intent = getIntent();
-        if (intent != null) {
-            phone_code = intent.getStringExtra("phone_code");
-            phone = intent.getStringExtra("phone");
-            lat =  intent.getDoubleExtra("lat",0.0);
-            lng = intent.getDoubleExtra("lng",0.0);
 
-
-        }
-    }
-    private void initView()
-    {
-        model = new SignUpModel(phone_code,phone);
+    private void initView() {
+        countryCodeModelList = new ArrayList<>();
+        model = new SignUpModel();
         binding.setModel(model);
-        presenter = new ActivitySignUpPresenter(this,this);
 
-        genderList = new ArrayList<>();
-        bloodList = new ArrayList<>();
-
-
+        CountryCodeModel m1 = new CountryCodeModel("+971",getString(R.string.uae));
+        CountryCodeModel m2 = new CountryCodeModel("+90",getString(R.string.turkey));
+        countryCodeModelList.add(m1);
+        countryCodeModelList.add(m2);
 
         binding.flSelectImage.setOnClickListener(view -> {
             dialog.show();
         });
 
-
         binding.btnSignUp.setOnClickListener(view -> {
-            presenter.checkData(model);
+            if (model.isDataValid(this)) {
+                if (uri == null) {
+                    signUpWithoutImage();
+                } else {
+                    signUpWithImage();
+
+                }
+            }
+        });
+
+        binding.tvCode.setOnClickListener(view -> {
+           dialog2.show();
         });
 
 
-        createImageDialogAlert();
 
+        createImageDialogAlert();
+        createCountriesDialog();
+    }
+
+    private void createCountriesDialog() {
+
+        dialog2 = new AlertDialog.Builder(this)
+                .create();
+        adapter = new CountriesAdapter(countryCodeModelList,this);
+
+        DialogCountriesBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_countries, null, false);
+        binding.recView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recView.setAdapter(adapter);
+
+        dialog2.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog2.setCanceledOnTouchOutside(false);
+        dialog2.setView(binding.getRoot());
+
+    }
+
+
+    private void signUpWithImage() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        RequestBody first_name_part = Common.getRequestBodyText(model.getFirst_name());
+        RequestBody last_name_part = Common.getRequestBodyText(model.getLast_name());
+        RequestBody phone_code_part = Common.getRequestBodyText(model.getPhone_code());
+        RequestBody phone_part = Common.getRequestBodyText(model.getPhone());
+        RequestBody email_part = Common.getRequestBodyText(model.getEmail());
+        RequestBody password_part = Common.getRequestBodyText(model.getPassword());
+        MultipartBody.Part image = Common.getMultiPart(this, uri, "logo");
+
+
+        Api.getService(Tags.base_url)
+                .signUpWithImage(first_name_part,last_name_part,phone_code_part,phone_part,email_part,password_part,image)
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            preferences = Preferences.getInstance();
+                            preferences.create_update_userdata(SignUpActivity.this, response.body());
+                            navigateToHomeActivity();
+                        } else {
+                            try {
+                                Log.e("error",response.code()+"__"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (response.code() == 500) {
+                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+                                Log.e("msg_category_error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    private void signUpWithoutImage() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .signUpWithoutImage(model.getFirst_name(), model.getLast_name(), model.getPhone_code(), model.getPhone(), model.getEmail(), model.getPassword())
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            preferences = Preferences.getInstance();
+                            preferences.create_update_userdata(SignUpActivity.this, response.body());
+                            navigateToHomeActivity();
+
+                        } else {
+                            try {
+                                Log.e("error",response.code()+"__"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (response.code() == 500) {
+                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==422){
+                                Toast.makeText(SignUpActivity.this, R.string.email_phone_not_exist, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+
+                            try {
+                                Log.e("error", response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    private void navigateToHomeActivity() {
+        Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void createImageDialogAlert() {
@@ -152,7 +297,6 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySignUpV
         }
     }
 
-
     private void SelectImage(int req) {
 
         Intent intent = new Intent();
@@ -184,7 +328,6 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySignUpV
 
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -252,13 +395,17 @@ public class SignUpActivity extends AppCompatActivity implements ActivitySignUpV
     }
 
 
-
-
-
-    @Override
-    public void onFailed(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    public void setItemData(CountryCodeModel countryCodeModel) {
+        binding.tvCode.setText(countryCodeModel.getCode());
+        model.setPhone_code(countryCodeModel.getCode());
+        binding.setModel(model);
+        dialog2.dismiss();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

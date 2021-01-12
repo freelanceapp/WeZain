@@ -1,6 +1,7 @@
 package com.wezain.models;
 
 import android.content.Context;
+import android.util.Patterns;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -13,41 +14,70 @@ import com.wezain.R;
 import java.io.Serializable;
 
 public class LoginModel extends BaseObservable implements Serializable {
-    private String phone_code;
-    private String phone;
-    public ObservableField<String> error_phone = new ObservableField<>();
+    private String email;
+    private String password;
+    public ObservableField<String> error_email = new ObservableField<>();
+    public ObservableField<String> error_password = new ObservableField<>();
 
     public LoginModel() {
-        phone_code ="+20";
-        phone ="";
+        email ="";
+        password ="";
     }
 
     public boolean isDataValid(Context context){
-        if (!phone.isEmpty()){
-            error_phone.set(null);
+        if (!email.isEmpty()&&
+                Patterns.EMAIL_ADDRESS.matcher(email).matches()&&
+                password.length()>=6
+        ){
+            error_email.set(null);
+            error_password.set(null);
+
             return true;
         }else {
-            error_phone.set(context.getString(R.string.field_req));
+            if (email.isEmpty()){
+                error_email.set(context.getString(R.string.field_req));
+            }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                error_email.set(context.getString(R.string.inv_email));
+
+            }else {
+                error_email.set(null);
+
+            }
+
+            if (password.isEmpty()){
+                error_password.set(context.getString(R.string.field_req));
+            }else if (password.length()<6){
+                error_password.set(context.getString(R.string.password_short));
+
+            }else {
+                error_password.set(null);
+
+            }
+
+
+
             return false;
         }
     }
+
     @Bindable
-    public String getPhone_code() {
-        return phone_code;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone_code(String phone_code) {
-        this.phone_code = phone_code;
-        notifyPropertyChanged(BR.phone_code);
-    }
-    @Bindable
-    public String getPhone() {
-        return phone;
+    public void setEmail(String email) {
+        this.email = email;
+        notifyPropertyChanged(BR.email);
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-        notifyPropertyChanged(BR.phone);
+    @Bindable
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+        notifyPropertyChanged(BR.password);
 
     }
 }

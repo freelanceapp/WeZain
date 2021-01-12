@@ -2,7 +2,7 @@ package com.wezain.tags;
 
 public class Tags {
 
-    public static String base_url = "http://yalahwy.com/";
+    public static String base_url = "http://wezain.com/";
     public static final String IMAGE_URL= base_url+"storage/";
     public static final String session_login = "login";
     public static final String session_logout = "logout";

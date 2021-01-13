@@ -11,27 +11,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wezain.R;
 import com.wezain.databinding.MainCategoryRow2Binding;
-import com.wezain.databinding.MainCategoryRowBinding;
+import com.wezain.databinding.PriceRowBinding;
 import com.wezain.models.MainDepartmentModel;
+import com.wezain.models.ProductModel;
 import com.wezain.ui.activity_home.fragments.Fragment_Categories;
-import com.wezain.ui.activity_home.fragments.Fragment_Home;
 
 import java.util.List;
 
-public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAdapter.MyHolder> {
+public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.MyHolder> {
 
-    private List<MainDepartmentModel> list;
+    private List<ProductModel.Product_Prices> list;
     private Context context;
     private int selectedPos = 0;
     private int oldPos = selectedPos;
-    private Fragment_Categories fragment_categories;
+    private String country;
 
-    public MainCategoriesAdapter(List<MainDepartmentModel> list, Context context, Fragment_Categories fragment_categories,int selectedPos) {
+    public PriceAdapter(List<ProductModel.Product_Prices> list, Context context, String country) {
         this.list = list;
         this.context = context;
-        this.fragment_categories = fragment_categories;
-        this.selectedPos = selectedPos;
-        oldPos = this.selectedPos;
+        this.country = country;
+
 
 
 
@@ -41,28 +40,35 @@ public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAd
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        MainCategoryRow2Binding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.main_category_row2, parent, false);
+        PriceRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.price_row, parent, false);
         return new MyHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         holder.binding.setModel(list.get(position));
-        MainDepartmentModel mainDepartmentModel = list.get(position);
+        holder.binding.setCountry(country);
+        ProductModel.Product_Prices model = list.get(position);
 
-        if (mainDepartmentModel.isSelected()){
-            holder.binding.cardView.setCardBackgroundColor(ContextCompat.getColor(context,R.color.color1));
-            holder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.white));
+        if (model.isSelected()){
+            holder.binding.fl.setCardBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimary));
+            holder.binding.fl.setCardElevation(5f);
+            holder.binding.tv1.setBackgroundResource(R.color.white);
+            holder.binding.tv2.setBackgroundResource(R.color.white);
+            holder.binding.tv3.setBackgroundResource(R.color.white);
+
         }else {
-            holder.binding.cardView.setCardBackgroundColor(ContextCompat.getColor(context,R.color.gray5));
-            holder.binding.tvTitle.setTextColor(ContextCompat.getColor(context,R.color.gray9));
+            holder.binding.fl.setCardBackgroundColor(ContextCompat.getColor(context,R.color.transparent));
+            holder.binding.fl.setCardElevation(0f);
+            holder.binding.tv1.setBackgroundResource(R.color.transparent);
+            holder.binding.tv2.setBackgroundResource(R.color.transparent);
+            holder.binding.tv3.setBackgroundResource(R.color.transparent);
 
         }
 
         holder.itemView.setOnClickListener(view -> {
             selectedPos = holder.getAdapterPosition();
             updateSelectedPos(selectedPos);
-            fragment_categories.updateSubDepartmentList(selectedPos);
 
 
 
@@ -77,9 +83,9 @@ public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAd
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
-        private MainCategoryRow2Binding binding;
+        private PriceRowBinding binding;
 
-        public MyHolder(MainCategoryRow2Binding binding) {
+        public MyHolder(PriceRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
@@ -89,18 +95,18 @@ public class MainCategoriesAdapter extends RecyclerView.Adapter<MainCategoriesAd
 
     }
 
-    public void updateSelectedPos(int selectedPos){
+    private void updateSelectedPos(int selectedPos){
         this.selectedPos = selectedPos;
 
         if (oldPos!=this.selectedPos){
-            MainDepartmentModel model2 = list.get(oldPos);
+            ProductModel.Product_Prices model2 = list.get(oldPos);
             model2.setSelected(false);
             list.set(oldPos,model2);
             notifyItemChanged(oldPos);
         }
 
 
-        MainDepartmentModel model1 = list.get(this.selectedPos);
+        ProductModel.Product_Prices model1 = list.get(this.selectedPos);
         model1.setSelected(true);
         list.set(selectedPos,model1);
         notifyItemChanged(this.selectedPos);

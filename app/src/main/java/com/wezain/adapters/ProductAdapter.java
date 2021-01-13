@@ -13,26 +13,25 @@ import com.wezain.R;
 import com.wezain.databinding.ProductRowBinding;
 import com.wezain.models.ProductModel;
 import com.wezain.ui.activity_home.fragments.Fragment_Home;
+import com.wezain.ui.activity_products.ProductsActivity;
 
 import java.util.List;
 
 import io.paperdb.Paper;
 
-public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.MyHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyHolder> {
 
     private List<ProductModel> list;
     private Context context;
-    private Fragment_Home fragment_home;
     private String country;
-    private String type;
+    private ProductsActivity activity;
 
-    public HomeProductAdapter(List<ProductModel> list, Context context, Fragment_Home fragment_home,String type) {
+
+    public ProductAdapter(List<ProductModel> list, Context context,String country) {
         this.list = list;
         this.context = context;
-        this.fragment_home = fragment_home;
-        Paper.init(context);
-        country = Paper.book().read("country","em");
-        this.type = type;
+        this.country = country;
+        activity = (ProductsActivity) context;
 
 
     }
@@ -51,6 +50,12 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
         holder.binding.setModel(model);
         holder.binding.setCountry(country);
         holder.binding.tvOldPrice.setPaintFlags(holder.binding.tvOldPrice.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+
+        holder.itemView.setOnClickListener(view -> {
+            ProductModel model2 = list.get(holder.getAdapterPosition());
+            activity.setItemData(model2);
+        });
+
         holder.binding.checkbox.setOnClickListener(view -> {
             ProductModel model2 = list.get(holder.getAdapterPosition());
             if (holder.binding.checkbox.isChecked()){
@@ -64,12 +69,7 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
             }
             list.set(holder.getAdapterPosition(),model2);
             notifyItemChanged(holder.getAdapterPosition());
-            fragment_home.add_remove_favorite(model2,holder.getAdapterPosition(),type);
-        });
-
-        holder.itemView.setOnClickListener(view -> {
-            ProductModel model2 = list.get(holder.getAdapterPosition());
-            fragment_home.setItemData(model2);
+            activity.add_remove_favorite(model2,holder.getAdapterPosition());
         });
     }
 

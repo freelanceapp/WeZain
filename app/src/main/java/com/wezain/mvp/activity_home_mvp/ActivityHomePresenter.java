@@ -28,7 +28,7 @@ public class ActivityHomePresenter {
     private Preferences preference;
     private UserModel userModel;
     private int selectedPos = 0;
-    public ActivityHomePresenter(Context context, HomeActivityView view, FragmentManager fragmentManager, double lat, double lng) {
+    public ActivityHomePresenter(Context context, HomeActivityView view, FragmentManager fragmentManager) {
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.view = view;
@@ -113,6 +113,7 @@ public class ActivityHomePresenter {
         }else {
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment_categories,"fragment_appointment").commit();
         }
+        view.onCategoryFragmentSelected();
     }
 
     private void displayFragmentOffers(){
@@ -207,6 +208,12 @@ public class ActivityHomePresenter {
         }else {
             displayFragmentHome();
             view.onHomeFragmentSelected();
+        }
+    }
+
+    public void refreshFragmentHome() {
+        if (fragment_home!=null&&fragment_home.isAdded()){
+            fragment_home.getProductsData();
         }
     }
 }

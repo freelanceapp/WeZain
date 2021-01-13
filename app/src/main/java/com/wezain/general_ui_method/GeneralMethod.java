@@ -1,6 +1,7 @@
 package com.wezain.general_ui_method;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -97,6 +98,10 @@ public class GeneralMethod {
 
     }
 
+    @BindingAdapter("rate")
+    public static void rate(SimpleRatingBar simpleRatingBar,double rate){
+        simpleRatingBar.setRating((float) rate);
+    }
 
 }
 

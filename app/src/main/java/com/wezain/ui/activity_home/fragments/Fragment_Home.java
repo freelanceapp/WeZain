@@ -1,5 +1,7 @@
 package com.wezain.ui.activity_home.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,7 @@ import com.wezain.preferences.Preferences;
 import com.wezain.remote.Api;
 import com.wezain.tags.Tags;
 import com.wezain.ui.activity_home.HomeActivity;
+import com.wezain.ui.activity_product_details.ProductDetailsActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,8 +83,21 @@ public class Fragment_Home extends Fragment {
         userModel = preferences.getUserData(activity);
         Paper.init(activity);
         lang = Paper.book().read("lang", "ar");
-        country = Paper.book().read("country", "eg");
+        country = Paper.book().read("country", "not_selected");
 
+        if (userModel==null){
+            if (country.equals("not_selected")){
+                country = "em";
+            }
+        }else {
+            if (country.equals("not_selected")){
+                if (userModel.getData().getPhone_code().equals("+971")){
+                    country = "em";
+                }else {
+                    country = "eg";
+                }
+            }
+        }
 
         sliderModelList = new ArrayList<>();
         categoryModelList = new ArrayList<>();
@@ -98,17 +115,17 @@ public class Fragment_Home extends Fragment {
         binding.recViewCategory.setAdapter(homeCategoriesAdapter);
 
 
-        flashProductAdapter = new HomeProductAdapter(flashProductModelList,activity,this);
+        flashProductAdapter = new HomeProductAdapter(flashProductModelList,activity,this,"flash");
         binding.recViewFlashProducts.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         binding.recViewFlashProducts.setAdapter(flashProductAdapter);
 
 
-        newProductAdapter = new HomeProductAdapter(newProductModelList,activity,this);
+        newProductAdapter = new HomeProductAdapter(newProductModelList,activity,this,"new");
         binding.recViewNewProducts.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         binding.recViewNewProducts.setAdapter(newProductAdapter);
 
 
-        recommendedProductAdapter = new HomeProductAdapter(recommendedProductModelList,activity,this);
+        recommendedProductAdapter = new HomeProductAdapter(recommendedProductModelList,activity,this,"recommended");
         binding.recViewRecommended.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         binding.recViewRecommended.setAdapter(recommendedProductAdapter);
 
@@ -325,7 +342,7 @@ public class Fragment_Home extends Fragment {
         binding.progBarNewProducts.setVisibility(View.VISIBLE);
         String user_id = null;
         if (userModel!=null){
-            // user_id = String.valueOf(userModel.getData().getId());
+             user_id = String.valueOf(userModel.getData().getId());
         }
         Api.getService(Tags.base_url)
                 .getHomeProducts(lang, country,"new",user_id)
@@ -402,7 +419,7 @@ public class Fragment_Home extends Fragment {
 
         String user_id = null;
         if (userModel!=null){
-           // user_id = String.valueOf(userModel.getData().getId());
+            user_id = String.valueOf(userModel.getData().getId());
         }
         Api.getService(Tags.base_url)
                 .getHomeProducts(lang, country,"is_flash",user_id)
@@ -479,7 +496,7 @@ public class Fragment_Home extends Fragment {
 
         String user_id = null;
         if (userModel!=null){
-            // user_id = String.valueOf(userModel.getData().getId());
+             user_id = String.valueOf(userModel.getData().getId());
         }
         Api.getService(Tags.base_url)
                 .getHomeProducts(lang, country,"is_recommended",user_id)
@@ -564,6 +581,141 @@ public class Fragment_Home extends Fragment {
         activity.displayFragmentCategory(selectedPos);
     }
 
+
+    public void add_remove_favorite(ProductModel productModel, int position, String type)
+    {
+
+        if (userModel == null) {
+            if (productModel.getProduct_likes()!=null){
+                productModel.setProduct_likes(null);
+            }else {
+                productModel.setProduct_likes(new ProductModel.ProductLikes());
+            }
+
+            Toast.makeText(activity, R.string.pls_signin_signup, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        newProductModelList.clear();
+        newProductAdapter.notifyDataSetChanged();
+        binding.tvNoDataNewProduct.setVisibility(View.GONE);
+        binding.progBarNewProducts.setVisibility(View.VISIBLE);
+
+
+        flashProductModelList.clear();
+        flashProductAdapter.notifyDataSetChanged();
+        binding.tvNoDataFlashProduct.setVisibility(View.GONE);
+        binding.progFlashProduct.setVisibility(View.VISIBLE);
+
+
+        recommendedProductModelList.clear();
+        recommendedProductAdapter.notifyDataSetChanged();
+        binding.tvNoDataRecommended.setVisibility(View.GONE);
+        binding.progBarRecommended.setVisibility(View.VISIBLE);
+
+
+        String user_id = String.valueOf(userModel.getData().getId());
+        Api.getService(Tags.base_url)
+                .add_remove_favorite("Bearer "+userModel.getData().getToken(),user_id, String.valueOf(productModel.getId()))
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
+                                getProductsData();
+                            }
+
+
+                        } else {
+
+                            try {
+                                Log.e("errorNotCode", response.code() + "__" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+
+
+
+                            if (productModel.getProduct_likes()!=null){
+                                productModel.setProduct_likes(null);
+                            }else {
+                                productModel.setProduct_likes(new ProductModel.ProductLikes());
+                            }
+
+                            if (type.equals("new")){
+                                newProductModelList.set(position,productModel);
+                                newProductAdapter.notifyItemChanged(position);
+                            }else if (type.equals("flash")){
+                                flashProductModelList.set(position,productModel);
+                                flashProductAdapter.notifyItemChanged(position);
+                            }else {
+                                recommendedProductModelList.set(position,productModel);
+                                recommendedProductAdapter.notifyItemChanged(position);
+                            }
+
+                            if (response.code() == 500) {
+                                Toast.makeText(activity, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        try {
+                            if (productModel.getProduct_likes()!=null){
+                                productModel.setProduct_likes(null);
+                            }else {
+                                productModel.setProduct_likes(new ProductModel.ProductLikes());
+                            }
+
+                            if (type.equals("new")){
+                                newProductModelList.set(position,productModel);
+                                newProductAdapter.notifyItemChanged(position);
+                            }else if (type.equals("flash")){
+                                flashProductModelList.set(position,productModel);
+                                flashProductAdapter.notifyItemChanged(position);
+                            }else {
+                                recommendedProductModelList.set(position,productModel);
+                                recommendedProductAdapter.notifyItemChanged(position);
+                            }
+                            if (t.getMessage() != null) {
+                                Log.e("error_not_code", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    public void setItemData(ProductModel model) {
+        Intent intent = new Intent(activity, ProductDetailsActivity.class);
+        intent.putExtra("data",model);
+        startActivityForResult(intent,100);
+
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode== Activity.RESULT_OK){
+            getProductsData();
+        }
+    }
 
     public class MyTimerTask extends TimerTask {
         @Override

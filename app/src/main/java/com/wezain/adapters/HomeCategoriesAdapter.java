@@ -20,7 +20,6 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 
     private List<MainDepartmentModel> list;
     private Context context;
-    private int i = -1;
     private Fragment_Home fragment_home;
 
     public HomeCategoriesAdapter(List<MainDepartmentModel> list, Context context, Fragment_Home fragment_home) {

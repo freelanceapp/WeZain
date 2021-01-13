@@ -77,4 +77,12 @@
     <string name="em_ph_exist">البريد الالكتروني او رقم الجوال موجود من قبل</string>
     <string name="user_not_exist">المستخدم غير موجود</string>
     <string name="search">بحث</string>
+    <string name="details">التفاصيل</string>
+    <string name="quantity">الكمية</string>
+    <string name="add_to_cart">أضف للسلة</string>
+    <string name="price">السعر</string>
+    <string name="comments3">تعليقا</string>
+    <string name="choose_properties">إختر المواصفات:-</string>
+    <string name="pls_signin_signup">قم بستجيل الدخول او إنشاء حساب</string>
+
 </resources>

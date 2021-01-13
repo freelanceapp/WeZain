@@ -4,6 +4,7 @@ import com.wezain.models.CategoryDataModel;
 import com.wezain.models.MainSliderImageDataModel;
 
 import com.wezain.models.ProductModel;
+import com.wezain.models.SingleProductModel;
 import com.wezain.models.SliderDataModel;
 import com.wezain.models.UserModel;
 
@@ -11,10 +12,12 @@ import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -70,6 +73,29 @@ public interface Service {
                                     @Part("email") RequestBody email,
                                     @Part("password") RequestBody password,
                                     @Part MultipartBody.Part logo
+    );
+
+
+    @GET("api/Get-products-by-department-id")
+    Call<List<ProductModel>> getProducts(@Query("lang") String lang,
+                                         @Query("country") String country,
+                                         @Query("department_type") String department_type,
+                                         @Query("department_id") int department_id,
+                                         @Query("user_id") String user_id
+    );
+
+    @GET("api/product-details")
+    Call<SingleProductModel> getProductDetails(@Query("lang") String lang,
+                                               @Query("country") String country,
+                                               @Query("product_id") int product_id,
+                                               @Query("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/add-favourite")
+    Call<ResponseBody> add_remove_favorite(@Header("Authorization") String token,
+                                           @Field("user_id") String user_id,
+                                           @Field("product_id") String product_id
     );
 
 }

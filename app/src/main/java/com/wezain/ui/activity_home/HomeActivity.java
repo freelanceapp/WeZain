@@ -28,7 +28,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     private ActivityHomeBinding binding;
     private FragmentManager fragmentManager;
     private ActivityHomePresenter presenter;
-    private double lat=0.0,lng=0.0;
+    private boolean onCategorySelected = false;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -40,23 +41,22 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
-        getDataFromIntent();
         initView();
     }
 
-    private void getDataFromIntent() {
-        Intent intent  = getIntent();
-        lat = intent.getDoubleExtra("lat",0.0);
-        lng = intent.getDoubleExtra("lng",0.0);
-    }
+
 
     private void initView() {
         fragmentManager = getSupportFragmentManager();
-        presenter = new ActivityHomePresenter(this, this, fragmentManager,lat,lng);
+        presenter = new ActivityHomePresenter(this, this, fragmentManager);
         binding.navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                presenter.manageFragments(item);
+                if (!onCategorySelected){
+                    presenter.manageFragments(item);
+
+                }
+                onCategorySelected = false;
                 return true;
             }
         });
@@ -67,6 +67,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     }
 
 
+    public void refreshFragmentHome(){
+        presenter.refreshFragmentHome();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -85,6 +88,12 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
         }
     }
 
+    @Override
+    public void onCategoryFragmentSelected() {
+        onCategorySelected = true;
+        binding.navigationView.setSelectedItemId(R.id.categories);
+
+    }
 
     @Override
     public void onBackPressed() {

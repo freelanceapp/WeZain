@@ -103,20 +103,48 @@
                     />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:singleLine="true"
-                    android:text='@{model.price+" "+(country.equals("eg")?@string/tl:@string/aed)}'
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    />
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_horizontal"
+                   android:layout_marginTop="5dp"
+                   android:orientation="horizontal"
+                   android:layout_marginBottom="5dp"
+                   >
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:ellipsize="end"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       android:singleLine="true"
+                       android:text='@{model.price+" "+(country.equals("eg")?@string/tl:@string/aed)}'
+                       android:textColor="@color/black"
+                       android:textSize="13sp"
+
+                       />
+
+
+                   <TextView
+                       android:id="@+id/tvOldPrice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_gravity="center"
+                       android:ellipsize="end"
+                       android:gravity="center"
+                       android:textStyle="bold"
+                       android:singleLine="true"
+                       android:text='@{model.old_price+" "+(country.equals("eg")?@string/tl:@string/aed)}'
+                       android:textColor="@color/black"
+                       android:textSize="12sp"
+                       android:layout_marginStart="5dp"
+                       android:layout_marginEnd="5dp"
+                       android:visibility='@{model.have_offer.equals("with_offer")?View.VISIBLE:View.GONE}'
+                       />
+
+               </LinearLayout>
 
 
 

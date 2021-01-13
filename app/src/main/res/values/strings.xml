@@ -75,5 +75,11 @@
     <string name="em_ph_exist">Email or phone is exist</string>
     <string name="user_not_exist">User is not exist</string>
     <string name="search">Search...</string>
-
+    <string name="details">Details</string>
+    <string name="quantity">Amount</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="price">Price</string>
+    <string name="comments3">comment</string>
+    <string name="choose_properties">Choose Properties:-</string>
+    <string name="pls_signin_signup">Please sign in or sign up</string>
 </resources>

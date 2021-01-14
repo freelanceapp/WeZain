@@ -90,8 +90,8 @@ public class SignUpActivity extends AppCompatActivity {
         model = new SignUpModel();
         binding.setModel(model);
 
-        CountryCodeModel m1 = new CountryCodeModel("+971",getString(R.string.uae));
-        CountryCodeModel m2 = new CountryCodeModel("+90",getString(R.string.turkey));
+        CountryCodeModel m1 = new CountryCodeModel("205","+971",getString(R.string.uae),"em");
+        CountryCodeModel m2 = new CountryCodeModel("197","+90",getString(R.string.turkey),"eg");
         countryCodeModelList.add(m1);
         countryCodeModelList.add(m2);
 

@@ -1,8 +1,13 @@
 package com.wezain.services;
 
+import com.wezain.models.CartDataModel;
+import com.wezain.models.SendOrderModel;
+import com.wezain.models.SingleOrderModel;
 import com.wezain.models.CategoryDataModel;
+import com.wezain.models.CityDataModel;
 import com.wezain.models.MainSliderImageDataModel;
 
+import com.wezain.models.OrderDataModel;
 import com.wezain.models.ProductModel;
 import com.wezain.models.SingleProductModel;
 import com.wezain.models.SliderDataModel;
@@ -14,6 +19,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -97,5 +103,37 @@ public interface Service {
                                            @Field("user_id") String user_id,
                                            @Field("product_id") String product_id
     );
+
+    @GET("api/cities")
+    Call<CityDataModel> getCities(@Query("lang") String lang,
+                                  @Query("country") String country
+    );
+
+    @POST("api/create-order")
+    Call<SingleOrderModel> sendOrder(@Header("Authorization") String token,
+                                     @Body CartDataModel body);
+
+    @GET("api/My-orders")
+    Call<OrderDataModel> getOrders(@Query("user_id") String user_id,
+                                   @Query("lang") String lang,
+                                   @Query("country") String country,
+                                   @Query("status") String status
+
+    );
+
+    @GET("api/My-order-details")
+    Call<SingleOrderModel> getSingleOrders(@Query("bill_id") String bill_id,
+                                           @Query("lang") String lang,
+                                           @Query("country") String country
+    );
+
+    @FormUrlEncoded
+    @POST("api/contact-us")
+    Call<ResponseBody> contactUs(@Field("name") String name,
+                                 @Field("email") String email,
+                                 @Field("subject") String subject,
+                                 @Field("message") String message
+    );
+
 
 }

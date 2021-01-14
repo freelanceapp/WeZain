@@ -5,9 +5,14 @@
         <variable
             name="lang"
             type="String" />
+
+        <variable
+            name="model"
+            type="com.wezain.models.UserModel" />
         <variable
             name="actions"
             type="com.wezain.interfaces.Listeners.ProfileActions" />
+        <import type="android.view.View"/>
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -41,6 +46,7 @@
             android:src="@drawable/image_avatar"
             app:civ_border_color="@color/color1"
             app:civ_border_width="1dp"
+            user_image="@{model.data.logo}"
             />
         <TextView
             android:layout_width="0dp"
@@ -48,7 +54,7 @@
             android:textColor="@color/gray9"
             android:textSize="15sp"
             android:layout_gravity="center"
-            android:text="محمد"
+            android:text='@{model!=null?(model.data.first_name+" "+model.data.last_name):""}'
             android:textStyle="bold"
             android:background="@color/transparent"
             android:gravity="center_vertical"
@@ -62,6 +68,7 @@
             android:layout_height="25dp"
             android:src="@drawable/ic_edit"
             android:layout_gravity="center_vertical"
+            android:visibility='@{model==null?View.INVISIBLE:View.VISIBLE,default=invisible}'
 
             />
     </LinearLayout>
@@ -109,45 +116,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    >
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_orders"
-                        app:tint="@color/color1"
-                        />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:textColor="@color/gray9"
-                        android:textSize="15sp"
-                        android:layout_gravity="center"
-                        android:text="@string/my_orders"
-                        android:textStyle="bold"
-                        android:background="@color/transparent"
-                        android:gravity="center_vertical"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:layout_weight="1"
 
-                        />
-
-                </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:background="@drawable/viewline"
-                        android:layerType="software"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginStart="15dp"
-                        />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -180,48 +149,18 @@
 
                         />
 
-                </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:background="@drawable/viewline"
-                        android:layerType="software"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginStart="15dp"
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_right_arrow"
+                        app:tint="@color/gray9"
+                        android:padding="3dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+
                         />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:onClick="@{()->actions.onAddress()}"
 
-                        >
+                </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_address"
-                            app:tint="@color/color1" />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:textColor="@color/gray9"
-                            android:textSize="15sp"
-                            android:layout_gravity="center"
-                            android:text="@string/addresses"
-                            android:textStyle="bold"
-                            android:background="@color/transparent"
-                            android:gravity="center_vertical"
-                            android:paddingStart="10dp"
-                            android:paddingEnd="10dp"
-                            android:layout_weight="1"
-
-                            />
-
-                    </LinearLayout>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -276,6 +215,8 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->actions.onCountry()}"
+
                         >
                         <ImageView
                             android:layout_width="24dp"
@@ -299,15 +240,18 @@
 
                             />
                         <ImageView
+                            android:id="@+id/imageCountry"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/flag_sa"
+
                             />
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_left_arrow"
-                            android:tint="@color/gray9"
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/gray9"
+                            android:padding="3dp"
+                            android:rotation='@{lang.equals("ar")?180:0}'
 
                             />
                     </LinearLayout>
@@ -326,12 +270,14 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->actions.onChangeLanguage()}"
+
                         >
 
                         <ImageView
                             android:layout_width="24dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_mice"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_language"
                             app:tint="@color/color1" />
                         <TextView
                             android:layout_width="0dp"
@@ -351,8 +297,11 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_left_arrow"
-                            android:tint="@color/gray9"
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/gray9"
+                            android:padding="3dp"
+                            android:rotation='@{lang.equals("ar")?180:0}'
+
                             />
                     </LinearLayout>
 
@@ -410,6 +359,8 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->actions.onHelp()}"
+
                         >
 
                         <ImageView
@@ -433,6 +384,16 @@
 
                             />
 
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/gray9"
+                            android:padding="3dp"
+                            android:rotation='@{lang.equals("ar")?180:0}'
+
+                            />
+
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
@@ -449,6 +410,8 @@
                         android:layout_marginEnd="15dp"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:onClick="@{()->actions.onContactUs()}"
+
                         >
 
                         <ImageView
@@ -472,6 +435,16 @@
 
                             />
 
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_right_arrow"
+                            app:tint="@color/gray9"
+                            android:padding="3dp"
+                            android:rotation='@{lang.equals("ar")?180:0}'
+
+                            />
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -488,7 +461,7 @@
                     android:layout_height="35dp"
                     android:padding="3dp"
                     android:src="@drawable/ic_logout"
-                    android:tint="@color/color1"
+                    app:tint="@color/color1"
                     />
 
                 <TextView

@@ -115,17 +115,17 @@ public class Fragment_Home extends Fragment {
         binding.recViewCategory.setAdapter(homeCategoriesAdapter);
 
 
-        flashProductAdapter = new HomeProductAdapter(flashProductModelList,activity,this,"flash");
+        flashProductAdapter = new HomeProductAdapter(flashProductModelList,activity,this,"flash",country);
         binding.recViewFlashProducts.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         binding.recViewFlashProducts.setAdapter(flashProductAdapter);
 
 
-        newProductAdapter = new HomeProductAdapter(newProductModelList,activity,this,"new");
+        newProductAdapter = new HomeProductAdapter(newProductModelList,activity,this,"new",country);
         binding.recViewNewProducts.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         binding.recViewNewProducts.setAdapter(newProductAdapter);
 
 
-        recommendedProductAdapter = new HomeProductAdapter(recommendedProductModelList,activity,this,"recommended");
+        recommendedProductAdapter = new HomeProductAdapter(recommendedProductModelList,activity,this,"recommended",country);
         binding.recViewRecommended.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         binding.recViewRecommended.setAdapter(recommendedProductAdapter);
 
@@ -138,6 +138,21 @@ public class Fragment_Home extends Fragment {
     }
 
     public void getProductsData() {
+        country = Paper.book().read("country", "not_selected");
+        if (userModel==null){
+            if (country.equals("not_selected")){
+                country = "em";
+            }
+        }else {
+            if (country.equals("not_selected")){
+                if (userModel.getData().getPhone_code().equals("+971")){
+                    country = "em";
+                }else {
+                    country = "eg";
+                }
+            }
+        }
+
         getNewProducts();
         getFlashProducts();
         getRecommendedProducts();
@@ -336,7 +351,9 @@ public class Fragment_Home extends Fragment {
     }
     private void getNewProducts()
     {
+
         newProductModelList.clear();
+        newProductAdapter.updateCountry(country);
         newProductAdapter.notifyDataSetChanged();
         binding.tvNoDataNewProduct.setVisibility(View.GONE);
         binding.progBarNewProducts.setVisibility(View.VISIBLE);
@@ -351,7 +368,6 @@ public class Fragment_Home extends Fragment {
                     public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
                         binding.progBarNewProducts.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
-
                             if (response.body() != null) {
                                 if (response.body().size()>0){
                                     newProductModelList.clear();
@@ -413,6 +429,7 @@ public class Fragment_Home extends Fragment {
     private void getFlashProducts()
     {
         flashProductModelList.clear();
+        flashProductAdapter.updateCountry(country);
         flashProductAdapter.notifyDataSetChanged();
         binding.tvNoDataFlashProduct.setVisibility(View.GONE);
         binding.progFlashProduct.setVisibility(View.VISIBLE);
@@ -490,6 +507,7 @@ public class Fragment_Home extends Fragment {
     private void getRecommendedProducts()
     {
         recommendedProductModelList.clear();
+        recommendedProductAdapter.updateCountry(country);
         recommendedProductAdapter.notifyDataSetChanged();
         binding.tvNoDataRecommended.setVisibility(View.GONE);
         binding.progBarRecommended.setVisibility(View.VISIBLE);

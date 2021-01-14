@@ -16,8 +16,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.wezain.R;
 import com.wezain.databinding.ActivityHomeBinding;
 import com.wezain.language.Language;
+import com.wezain.models.CartDataModel;
 import com.wezain.mvp.activity_home_mvp.ActivityHomePresenter;
 import com.wezain.mvp.activity_home_mvp.HomeActivityView;
+import com.wezain.preferences.Preferences;
+import com.wezain.ui.activity_cart.CartActivity;
 import com.wezain.ui.activity_login.LoginActivity;
 
 import java.util.List;
@@ -29,6 +32,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
     private FragmentManager fragmentManager;
     private ActivityHomePresenter presenter;
     private boolean onCategorySelected = false;
+    private CartDataModel cartDataModel;
+    private Preferences preferences;
 
 
     @Override
@@ -47,6 +52,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
 
 
     private void initView() {
+        preferences = Preferences.getInstance();
+
         fragmentManager = getSupportFragmentManager();
         presenter = new ActivityHomePresenter(this, this, fragmentManager);
         binding.navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,7 +67,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
                 return true;
             }
         });
-
+        binding.flCart.setOnClickListener(view -> {
+            Intent intent = new Intent(this, CartActivity.class);
+            startActivity(intent);
+        });
 
 
 
@@ -119,8 +129,30 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cartDataModel = preferences.getCartData(this);
+        if (cartDataModel!=null){
+            int count = cartDataModel.getProducts().size();
+            binding.setCount(count);
+        }else {
+            binding.setCount(0);
+        }
+    }
+
     @Override
     public void onFinished() {
         finish();
+    }
+
+    public void refreshActivity(String lang) {
+        Paper.init(this);
+        Paper.book().write("lang",lang);
+        Language.updateResources(this,lang);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }

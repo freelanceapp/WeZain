@@ -23,12 +23,16 @@ import com.wezain.adapters.PriceAdapter;
 import com.wezain.adapters.ProductSliderAdapter;
 import com.wezain.databinding.ActivityProductDetailsBinding;
 import com.wezain.language.Language;
+import com.wezain.models.CartDataModel;
 import com.wezain.models.ProductModel;
 import com.wezain.models.SingleProductModel;
 import com.wezain.models.UserModel;
+import com.wezain.mvp.activity_product_details_mvp.ActivityProductDetailsPresenter;
+import com.wezain.mvp.activity_product_details_mvp.ActivityProductDetailsView;
 import com.wezain.preferences.Preferences;
 import com.wezain.remote.Api;
 import com.wezain.tags.Tags;
+import com.wezain.ui.activity_cart.CartActivity;
 import com.wezain.ui.activity_products.ProductsActivity;
 
 import java.io.IOException;
@@ -41,9 +45,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailsActivity extends AppCompatActivity implements ActivityProductDetailsView {
     private ActivityProductDetailsBinding binding;
-    private String lang;;
+    private String lang;
+    private ActivityProductDetailsPresenter presenter;
     private ProductSliderAdapter sliderAdapter;
     private PriceAdapter priceAdapter;
     private ProductModel productModel;
@@ -52,6 +57,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private String  country;
     private Preferences preferences;
     private UserModel userModel;
+    private ProductModel.Product_Prices product_prices=null;
+
 
 
 
@@ -79,6 +86,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void initView() {
         preferences = Preferences.getInstance();
+        presenter = new ActivityProductDetailsPresenter(this, this);
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
@@ -118,7 +126,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-       // binding.flAddToCart.setOnClickListener(view -> createDialogAlert());
+        binding.flAddToCart.setOnClickListener(view ->{
+            if (productModel.getPrice_type().equals("single")){
+                product_prices = productModel.getProduct_prices().get(0);
+                product_prices.setPrice(productModel.getPrice());
+            }
+
+            if (product_prices!=null){
+                presenter.add_to_cart(product_prices,productModel,amount);
+                Toast.makeText(this, R.string.suc, Toast.LENGTH_SHORT).show();
+
+            }else {
+                Toast.makeText(this, R.string.ch_item_prop, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         binding.llBack.setOnClickListener(view -> {
             onBackPressed();
@@ -137,8 +158,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
         binding.flCart.setOnClickListener(view -> {
-            /*Intent intent = new Intent(this, CartActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(this, CartActivity.class);
+            startActivity(intent);
         });
 
 
@@ -316,11 +337,31 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
 
+    @Override
+    public void onCartUpdated(double totalCost, int itemCount, List<CartDataModel.CartModel> cartModelList) {
+        binding.setCount(itemCount);
+    }
+
+    @Override
+    public void onCartCountUpdated(int count) {
+        binding.setCount(count);
+    }
+
+    @Override
+    public void onAmountSelectedFromCart(int amount) {
+        this.amount = amount;
+        binding.tvAmount.setText(String.valueOf(amount));
+
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
+        presenter.getCartCount();
+        if (product_prices!=null){
+            presenter.getItemAmount(product_prices);
 
+        }
 
 
     }
@@ -331,5 +372,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
             setResult(RESULT_OK);
         }
         finish();
+    }
+
+    public void setItemPropertySelected(ProductModel.Product_Prices model) {
+        product_prices = model;
+        presenter.getItemAmount(product_prices);
     }
 }

@@ -72,17 +72,12 @@ public interface Listeners {
     }
     interface ProfileActions
     {
-        void onMyWallet();
         void onFavorite();
-        void onAddress();
         void onChangeLanguage();
-        void onTerms();
         void onContactUs();
-        void onMenu();
-        void onFacebook();
-        void onTwitter();
-        void onInstagram();
+        void onCountry();
         void onLogout();
+        void onHelp();
 
     }
 }

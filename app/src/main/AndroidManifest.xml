@@ -23,16 +23,36 @@
         android:theme="@style/Theme.WeZain"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activity_product_details.ProductDetailsActivity"
+        <activity android:name=".ui.activity_contact_us.ContactUsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             />
-        <activity android:name=".ui.activity_products.ProductsActivity"
+        <activity android:name=".ui.activity_order_details.OrderDetailsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             />
+        <activity android:name=".ui.activity_check_out.CheckOutActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity
+            android:name=".ui.activity_cart.CartActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity_product_details.ProductDetailsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity_products.ProductsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity_language.LanguageActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

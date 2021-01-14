@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.wezain.models.CartDataModel;
 import com.wezain.models.UserModel;
 import com.wezain.models.UserSettingsModel;
 import com.wezain.tags.Tags;
@@ -31,6 +32,22 @@ public class Preferences {
 
 
     }
+
+    public void createUpdateCartData(Context context, CartDataModel cartDataModel) {
+        SharedPreferences preferences = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String data = gson.toJson(cartDataModel);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("data", data);
+        editor.apply();
+    }
+
+    public CartDataModel getCartData(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        return gson.fromJson(preferences.getString("data", ""),CartDataModel.class);
+    }
+
 
     public UserSettingsModel getUserSettings(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("settings_pref", Context.MODE_PRIVATE);
@@ -68,22 +85,13 @@ public class Preferences {
 
     }
 
-
-    public void create_room_id(Context context, String room_id) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("room_id", room_id);
-        editor.apply();
-
-
+    public void clearCart(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.clear();
+        edit.apply();
     }
 
-    public String getRoomId(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("room", Context.MODE_PRIVATE);
-        String room_id = preferences.getString("room_id", Tags.session_logout);
-        return room_id;
-    }
 
     public String getSession(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);

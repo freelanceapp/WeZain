@@ -15,6 +15,7 @@ import com.wezain.databinding.PriceRowBinding;
 import com.wezain.models.MainDepartmentModel;
 import com.wezain.models.ProductModel;
 import com.wezain.ui.activity_home.fragments.Fragment_Categories;
+import com.wezain.ui.activity_product_details.ProductDetailsActivity;
 
 import java.util.List;
 
@@ -25,11 +26,13 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.MyHolder> {
     private int selectedPos = 0;
     private int oldPos = selectedPos;
     private String country;
+    private ProductDetailsActivity activity;
 
     public PriceAdapter(List<ProductModel.Product_Prices> list, Context context, String country) {
         this.list = list;
         this.context = context;
         this.country = country;
+        activity = (ProductDetailsActivity) context;
 
 
 
@@ -69,7 +72,8 @@ public class PriceAdapter extends RecyclerView.Adapter<PriceAdapter.MyHolder> {
         holder.itemView.setOnClickListener(view -> {
             selectedPos = holder.getAdapterPosition();
             updateSelectedPos(selectedPos);
-
+            ProductModel.Product_Prices model1 = list.get(this.selectedPos);
+            activity.setItemPropertySelected(model1);
 
 
 

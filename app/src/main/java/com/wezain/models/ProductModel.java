@@ -146,5 +146,9 @@ public class ProductModel implements Serializable {
         public void setSelected(boolean selected) {
             isSelected = selected;
         }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
     }
 }

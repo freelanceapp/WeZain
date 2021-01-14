@@ -50,7 +50,7 @@
     <string name="my_profile">حسابى</string>
     <string name="my_orders">طلباتى</string>
     <string name="favourite">المفضلة</string>
-    <string name="addresses">العناوين</string>
+    <string name="addresses">العنوان</string>
     <string name="setting">الأعدادات</string>
     <string name="country">البلد</string>
     <string name="language">اللغة</string>
@@ -84,5 +84,27 @@
     <string name="comments3">تعليقا</string>
     <string name="choose_properties">إختر المواصفات:-</string>
     <string name="pls_signin_signup">قم بستجيل الدخول او إنشاء حساب</string>
+    <string name="cart">السلة</string>
+    <string name="total_items_cost">إجمالي سعر المنتجات</string>
+    <string name="checkout">الدفع</string>
+    <string name="ch_item_prop">من فضلك اختر خصائص العنصر</string>
+    <string name="suc">تم بنجاح!</string>
+    <string name="state">محل الإقامة</string>
+    <string name="payment_method">الدفع:-</string>
+    <string name="cash">نقدي</string>
+    <string name="ch_country">إختر الدولة</string>
+    <string name="ch_city">إختر المدينة</string>
+    <string name="order_num">رقم الطلب</string>
+    <string name="status">حالة الطلب</string>
+    <string name="total">الإجمالى</string>
+    <string name="order_details">تفاصيل الطلب</string>
+    <string name="amount">الكمية</string>
+    <string name="message">الرسالة</string>
+    <string name="send">إرسال</string>
+    <string name="subject">الموضوع</string>
+    <string name="products">المنتجات:-</string>
+    <string name="details2">التفاصيل:-</string>
+    <string name="delete">حذف</string>
+    <string name="will_delete_cart">سيتم حذف المنتجات من السلة نظرا لاختلاف الاسعار.</string>
 
 </resources>

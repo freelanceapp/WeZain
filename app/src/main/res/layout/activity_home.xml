@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+    <data>
+        <variable
+            name="count"
+            type="Integer" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +43,7 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_nav_notification"
-                        app:tint="@color/color1"
+                        app:tint="@color/colorPrimary"
                         />
                 </FrameLayout>
 
@@ -56,9 +61,45 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_search"
-                        app:tint="@color/color1"
+                        app:tint="@color/colorPrimary"
                         />
                 </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/flCart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_cart"
+                        app:tint="@color/colorPrimary"
+                        android:background="@drawable/circle_gray_bg"
+                        />
+
+                    <TextView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_margin="2dp"
+                        android:background="@drawable/circle_white"
+                        android:clickable="false"
+                        android:gravity="center"
+                        android:longClickable="false"
+                        android:singleLine="true"
+                        android:text='@{String.valueOf(count),default="0"}'
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp" />
+
+                </FrameLayout>
+
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
         <FrameLayout

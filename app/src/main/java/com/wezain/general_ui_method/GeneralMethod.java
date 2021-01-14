@@ -103,6 +103,12 @@ public class GeneralMethod {
         simpleRatingBar.setRating((float) rate);
     }
 
+    @BindingAdapter({"amount","price","country"})
+    public static void calculateCartItemCost(TextView textView,int amount,double price,String country){
+        double cost = amount*price;
+        textView.setText(String.format(Locale.ENGLISH,"%.2f %s",cost,country.equals("em")?textView.getContext().getString(R.string.aed):textView.getContext().getString(R.string.tl)));
+    }
+
 }
 
 

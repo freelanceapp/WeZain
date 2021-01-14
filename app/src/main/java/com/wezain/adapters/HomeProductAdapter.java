@@ -26,12 +26,12 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
     private String country;
     private String type;
 
-    public HomeProductAdapter(List<ProductModel> list, Context context, Fragment_Home fragment_home,String type) {
+    public HomeProductAdapter(List<ProductModel> list, Context context, Fragment_Home fragment_home,String type,String country) {
         this.list = list;
         this.context = context;
         this.fragment_home = fragment_home;
         Paper.init(context);
-        country = Paper.book().read("country","em");
+        this.country = country;
         this.type = type;
 
 
@@ -89,5 +89,9 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
         }
 
 
+    }
+
+    public void updateCountry(String country){
+        this.country = country;
     }
 }

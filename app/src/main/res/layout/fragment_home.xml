@@ -130,7 +130,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/upcoming_products"
                             android:textColor="@color/black"
-                            android:textSize="13sp" />
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            />
                     </LinearLayout>
 
 
@@ -245,7 +247,9 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/favorite_offers"
                                     android:textColor="@color/black"
-                                    android:textSize="13sp" />
+                                    android:textSize="15sp"
+                                    android:textStyle="bold"
+                                    />
                             </LinearLayout>
 
 
@@ -317,7 +321,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/most_seller"
                         android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        />
                 </LinearLayout>
 
                 <FrameLayout

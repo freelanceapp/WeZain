@@ -47,7 +47,7 @@
     <string name="my_profile">My Profile</string>
     <string name="my_orders">My Orders</string>
     <string name="favourite">Favourite</string>
-    <string name="addresses">Addresses</string>
+    <string name="addresses">Address</string>
     <string name="setting">Setting</string>
     <string name="country">Country</string>
     <string name="language">Language</string>
@@ -82,4 +82,26 @@
     <string name="comments3">comment</string>
     <string name="choose_properties">Choose Properties:-</string>
     <string name="pls_signin_signup">Please sign in or sign up</string>
+    <string name="cart">Cart</string>
+    <string name="total_items_cost">Total items cost</string>
+    <string name="checkout">Check out</string>
+    <string name="ch_item_prop">Choose item property</string>
+    <string name="suc">Success!</string>
+    <string name="state">State</string>
+    <string name="payment_method">Payment method:-</string>
+    <string name="cash">Cash</string>
+    <string name="ch_country">Choose country</string>
+    <string name="ch_city">Choose city</string>
+    <string name="order_num">Order Number</string>
+    <string name="status">Status</string>
+    <string name="total">Total</string>
+    <string name="order_details">Order details</string>
+    <string name="amount">Amount</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="subject">Subject</string>
+    <string name="products">Products:-</string>
+    <string name="details2">Details:-</string>
+    <string name="delete">Delete</string>
+    <string name="will_delete_cart">Will Delete products from cart</string>
 </resources>

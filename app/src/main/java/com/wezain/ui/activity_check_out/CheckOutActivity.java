@@ -98,16 +98,14 @@ public class CheckOutActivity extends AppCompatActivity {
                 }
             }
         } else {
-            if (country.equals("not_selected")) {
-                if (userModel.getData().getPhone_code().equals("+971")) {
-                    country = "em";
-                    binding.setCountry(getString(R.string.uae));
+            if (userModel.getData().getPhone_code().equals("+971")) {
+                country = "em";
+                binding.setCountry(getString(R.string.uae));
 
-                } else {
-                    country = "eg";
-                    binding.setCountry(getString(R.string.turkey));
+            } else {
+                country = "eg";
+                binding.setCountry(getString(R.string.turkey));
 
-                }
             }
         }
 

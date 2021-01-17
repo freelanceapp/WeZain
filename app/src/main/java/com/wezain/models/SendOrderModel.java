@@ -18,7 +18,6 @@ public class SendOrderModel extends BaseObservable implements Serializable {
     private String last_name;
     private String phone_code;
     private String phone;
-    private CountryCodeModel countryModel;
     private CityModel cityModel;
     private String state;
     private String address;
@@ -35,7 +34,6 @@ public class SendOrderModel extends BaseObservable implements Serializable {
         first_name = "";
         last_name="";
         phone="";
-        countryModel=null;
         cityModel=null;
         state="";
         address="";
@@ -47,7 +45,6 @@ public class SendOrderModel extends BaseObservable implements Serializable {
                 !phone.isEmpty()&&
                 !state.isEmpty()&&
                 !address.isEmpty()&&
-                countryModel!=null&&
                 cityModel!=null
 
         ){
@@ -81,9 +78,9 @@ public class SendOrderModel extends BaseObservable implements Serializable {
 
             }
 
-            if (countryModel==null){
+            /*if (countryModel==null){
                 Toast.makeText(context, R.string.ch_country, Toast.LENGTH_SHORT).show();
-            }
+            }*/
 
             if (cityModel==null){
                 Toast.makeText(context, R.string.ch_city, Toast.LENGTH_SHORT).show();
@@ -154,6 +151,7 @@ public class SendOrderModel extends BaseObservable implements Serializable {
 
     }
 
+/*
     public CountryCodeModel getCountryModel() {
         return countryModel;
     }
@@ -161,6 +159,7 @@ public class SendOrderModel extends BaseObservable implements Serializable {
     public void setCountryModel(CountryCodeModel countryModel) {
         this.countryModel = countryModel;
     }
+*/
 
     public CityModel getCityModel() {
         return cityModel;

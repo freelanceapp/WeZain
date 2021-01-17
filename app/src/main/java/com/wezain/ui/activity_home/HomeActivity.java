@@ -168,4 +168,8 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
         finish();
         startActivity(intent);
     }
+
+    public void updateCartCount(int count) {
+        binding.setCount(count);
+    }
 }

@@ -80,7 +80,7 @@ public class CartActivity extends AppCompatActivity implements CartActivityView 
                 }
             }
         }
-        presenter = new ActivityCartPresenter(this, this);
+        presenter = new ActivityCartPresenter(this, this,country);
 
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CartAdapter(cartModelList, this,country);

@@ -33,7 +33,7 @@ import com.wezain.ui.activity_web_view.WebViewActivity;
 
 import io.paperdb.Paper;
 
-public class Fragment_Profile extends Fragment implements Listeners.ProfileActions{
+public class Fragment_Profile extends Fragment implements Listeners.ProfileActions {
     private FragmentProfileBinding binding;
     private String lang;
     private String country;
@@ -42,19 +42,19 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
     private UserModel userModel;
 
 
-    public static Fragment_Profile newInstance(){
+    public static Fragment_Profile newInstance() {
         return new Fragment_Profile();
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile,container,false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         initView();
         return binding.getRoot();
     }
 
-    private void initView()
-    {
+    private void initView() {
         activity = (HomeActivity) getActivity();
         Paper.init(activity);
 
@@ -66,11 +66,11 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
             if (country.equals("not_selected")) {
                 country = "em";
                 binding.imageCountry.setImageResource(R.drawable.flag_ae);
-            }else {
-                if (country.equals("em")){
+            } else {
+                if (country.equals("em")) {
                     binding.imageCountry.setImageResource(R.drawable.flag_ae);
 
-                }else {
+                } else {
                     binding.imageCountry.setImageResource(R.drawable.flag_tr);
 
                 }
@@ -94,7 +94,7 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
 
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
-        if (userModel!=null){
+        if (userModel != null) {
             binding.setModel(userModel);
         }
 
@@ -103,11 +103,11 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
 
     @Override
     public void onFavorite() {
-        if (userModel!=null){
+        if (userModel != null) {
 
             Intent intent = new Intent(activity, FavoriteActivity.class);
-            startActivityForResult(intent,300);
-        }else {
+            startActivityForResult(intent, 300);
+        } else {
             Toast.makeText(activity, getString(R.string.pls_signin_signup), Toast.LENGTH_SHORT).show();
         }
 
@@ -117,9 +117,8 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
     @Override
     public void onChangeLanguage() {
         Intent intent = new Intent(activity, LanguageActivity.class);
-        startActivityForResult(intent,100);
+        startActivityForResult(intent, 100);
     }
-
 
 
     @Override
@@ -130,7 +129,23 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
 
     @Override
     public void onCountry() {
-        createCountryDialogAlert();
+        Preferences preferences = Preferences.getInstance();
+        CartDataModel cartDataModel = preferences.getCartData(activity);
+
+        if (cartDataModel == null) {
+            createCountryDialogAlert();
+        } else {
+            if (cartDataModel.getProducts() != null && cartDataModel.getProducts().size() > 0) {
+
+                createDialogAlert();
+
+            } else {
+
+                createCountryDialogAlert();
+
+
+            }
+        }
     }
 
 
@@ -142,60 +157,45 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
     @Override
     public void onHelp() {
         Intent intent = new Intent(activity, WebViewActivity.class);
-        String url = Tags.base_url+lang+"/aboutUs";
-        intent.putExtra("url",url);
+        String url = Tags.base_url + lang + "/aboutUs";
+        intent.putExtra("url", url);
         startActivity(intent);
     }
 
     @Override
     public void onUpdateProfile() {
         Intent intent = new Intent(activity, SignUpActivity.class);
-        startActivityForResult(intent,200);
+        startActivityForResult(intent, 200);
     }
 
 
-    private void createCountryDialogAlert()
-    {
+    private void createCountryDialogAlert() {
         final AlertDialog dialog = new AlertDialog.Builder(activity)
                 .create();
 
         DialogCountries2Binding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.dialog_countries2, null, false);
 
-        if (country.equals("em")){
+        if (country.equals("em")) {
             binding.cardEm.setBackgroundResource(R.drawable.small_stroke_gray2);
             binding.cardTr.setBackgroundResource(0);
-        }else {
+        } else {
             binding.cardEm.setBackgroundResource(0);
-            binding.cardTr.setBackgroundResource(R.drawable.small_stroke_gray2);;
+            binding.cardTr.setBackgroundResource(R.drawable.small_stroke_gray2);
+
         }
 
         binding.cardEm.setOnClickListener(view -> {
 
-            if(!country.equals("em")){
+            if (!country.equals("em")) {
                 Paper.init(activity);
-                Paper.book().write("country","em");
+                Paper.book().write("country", "em");
                 country = "em";
                 Fragment_Profile.this.binding.imageCountry.setImageResource(R.drawable.flag_ae);
-
-                Preferences preferences = Preferences.getInstance();
-                CartDataModel cartDataModel = preferences.getCartData(activity);
-
-                if (cartDataModel==null){
-                   activity.refreshFragmentHome();
-                }else {
-                    if (cartDataModel.getProducts()!=null&&cartDataModel.getProducts().size()>0){
-                        createDialogAlert();
-
-                    }else {
-                        activity.refreshFragmentHome();
-
-                    }
-                }
+                activity.refreshFragmentHome();
 
 
 
             }
-
 
 
             dialog.dismiss();
@@ -205,26 +205,13 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
 
 
         binding.cardTr.setOnClickListener(view -> {
-            if(!country.equals("eg")){
+            if (!country.equals("eg")) {
                 Paper.init(activity);
-                Paper.book().write("country","eg");
+                Paper.book().write("country", "eg");
                 country = "eg";
                 Fragment_Profile.this.binding.imageCountry.setImageResource(R.drawable.flag_tr);
+                activity.refreshFragmentHome();
 
-                Preferences preferences = Preferences.getInstance();
-                CartDataModel cartDataModel = preferences.getCartData(activity);
-
-                if (cartDataModel==null){
-                    activity.refreshFragmentHome();
-                }else {
-                    if (cartDataModel.getProducts()!=null&&cartDataModel.getProducts().size()>0){
-                        createDialogAlert();
-
-                    }else {
-                        activity.refreshFragmentHome();
-
-                    }
-                }
             }
 
 
@@ -232,29 +219,31 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
         });
 
 
-
-
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.setCanceledOnTouchOutside(false);
         dialog.setView(binding.getRoot());
         dialog.show();
     }
-    private void createDialogAlert()
-    {
+
+    private void createDialogAlert() {
         final AlertDialog dialog = new AlertDialog.Builder(activity)
                 .create();
 
         DialogCartBinding binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.dialog_cart, null, false);
 
         binding.tvMsg.setText(R.string.will_delete_cart);
-        binding.btnCancel.setOnClickListener(v -> dialog.dismiss()
+        binding.btnCancel.setOnClickListener(v -> {
+                    dialog.dismiss();
+        }
         );
 
         binding.btnDelete.setOnClickListener(v -> {
                     Preferences preferences = Preferences.getInstance();
                     preferences.clearCart(activity);
+                    activity.updateCartCount(0);
                     activity.refreshFragmentHome();
                     dialog.dismiss();
+                    createCountryDialogAlert();
 
                 }
         );
@@ -268,13 +257,13 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==100&&resultCode== Activity.RESULT_OK&&data!=null){
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK && data != null) {
             String lang = data.getStringExtra("lang");
             activity.refreshActivity(lang);
-        }else if (requestCode==200&&resultCode== Activity.RESULT_OK){
+        } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             userModel = preferences.getUserData(activity);
             binding.setModel(userModel);
-        }else if (requestCode==300&&resultCode== Activity.RESULT_OK){
+        } else if (requestCode == 300 && resultCode == Activity.RESULT_OK) {
             activity.refreshFragmentHome();
         }
 

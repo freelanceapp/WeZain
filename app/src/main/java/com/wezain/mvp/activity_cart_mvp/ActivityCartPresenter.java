@@ -30,13 +30,15 @@ public class ActivityCartPresenter {
     private CartActivityView view;
     private Context context;
     private CartDataModel cartDataModel;
+    private String country;
 
-    public ActivityCartPresenter(CartActivityView view, Context context) {
+    public ActivityCartPresenter(CartActivityView view, Context context,String country) {
         this.view = view;
         this.context = context;
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(context);
         cartDataModel = preferences.getCartData(context);
+        this.country = country;
         if (cartDataModel==null){
             cartDataModel = new CartDataModel();
             cartDataModel.setProducts(new ArrayList<>());
@@ -136,12 +138,11 @@ public class ActivityCartPresenter {
         cartDataModel.setFirst_name(sendOrderModel.getFirst_name());
         cartDataModel.setLast_name(sendOrderModel.getLast_name());
         cartDataModel.setPhone(sendOrderModel.getPhone_code()+""+sendOrderModel.getPhone());
-        cartDataModel.setCountry_id(Integer.parseInt(sendOrderModel.getCountryModel().getId()));
         cartDataModel.setCity(sendOrderModel.getCityModel().getCity_name_en());
         cartDataModel.setState(sendOrderModel.getState());
         cartDataModel.setAddress(sendOrderModel.getAddress());
         cartDataModel.setPayment_type("cash");
-        cartDataModel.setBill_currency(sendOrderModel.getCountryModel().getCountry());
+        cartDataModel.setBill_currency(country);
         cartDataModel.setLang(lang);
         ProgressDialog dialog = Common.createProgressDialog(context, context.getString(R.string.wait));
         dialog.setCancelable(false);

@@ -334,6 +334,8 @@
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:text="@string/already_have_an_account"
+                android:visibility='@{userModel!=null?View.GONE:View.VISIBLE,default=gone}'
+
                 />
 
         </LinearLayout>

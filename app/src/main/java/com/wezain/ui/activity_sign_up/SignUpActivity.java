@@ -100,6 +100,7 @@ public class SignUpActivity extends AppCompatActivity {
             model.setPassword("123456");
             binding.btnSignUp.setText(R.string.update_profile);
         }
+        binding.setUserModel(userModel);
         binding.setModel(model);
 
         CountryCodeModel m1 = new CountryCodeModel("205","+971",getString(R.string.uae),"em");
@@ -550,8 +551,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        if (userModel==null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
         finish();
     }
 }

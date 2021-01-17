@@ -99,9 +99,6 @@ public class SignUpActivity extends AppCompatActivity {
             model.setEmail(userModel.getData().getEmail());
             model.setPassword("123456");
             binding.btnSignUp.setText(R.string.update_profile);
-        }else {
-            binding.btnSignUp.setVisibility(View.VISIBLE);
-            binding.btnSignUp.setText(getString(R.string.sign_up));
         }
         binding.setModel(model);
 
@@ -140,6 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
 
+        binding.tvLogin.setOnClickListener(view -> finish());
 
         createImageDialogAlert();
         createCountriesDialog();

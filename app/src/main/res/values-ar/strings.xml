@@ -109,5 +109,6 @@
     <string name="update_profile">تعديل الملف الشخصي</string>
     <string name="back">رجوع</string>
     <string name="no_search_results">لا توجد نتائج للبحث</string>
+    <string name="already_have_an_account">لدي حساب بالفعل!تسجيل دخول</string>
 
 </resources>

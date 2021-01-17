@@ -78,6 +78,6 @@ public interface Listeners {
         void onCountry();
         void onLogout();
         void onHelp();
-
+        void onUpdateProfile();
     }
 }

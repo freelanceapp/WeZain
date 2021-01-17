@@ -67,6 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
     private SignUpModel model;
     private AlertDialog dialog;
     private Preferences preferences;
+    private UserModel userModel;
     private CountriesAdapter adapter;
     private AlertDialog dialog2;
     private List<CountryCodeModel> countryCodeModelList;
@@ -87,7 +88,18 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void initView() {
         countryCodeModelList = new ArrayList<>();
+        preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(this);
         model = new SignUpModel();
+        if (userModel!=null){
+            model.setPhone_code(userModel.getData().getPhone_code());
+            model.setPhone(userModel.getData().getPhone());
+            model.setFirst_name(userModel.getData().getFirst_name());
+            model.setLast_name(userModel.getData().getLast_name());
+            model.setEmail(userModel.getData().getEmail());
+            model.setPassword("123456");
+            binding.btnSignUp.setText(R.string.update_profile);
+        }
         binding.setModel(model);
 
         CountryCodeModel m1 = new CountryCodeModel("205","+971",getString(R.string.uae),"em");
@@ -102,9 +114,19 @@ public class SignUpActivity extends AppCompatActivity {
         binding.btnSignUp.setOnClickListener(view -> {
             if (model.isDataValid(this)) {
                 if (uri == null) {
-                    signUpWithoutImage();
+                    if (userModel==null){
+                        signUpWithoutImage();
+
+                    }else {
+                        updateProfileWithoutImage();
+                    }
                 } else {
-                    signUpWithImage();
+                    if (userModel==null){
+                        signUpWithImage();
+
+                    }else {
+                        updateProfileWithImage();
+                    }
 
                 }
             }
@@ -119,6 +141,8 @@ public class SignUpActivity extends AppCompatActivity {
         createImageDialogAlert();
         createCountriesDialog();
     }
+
+
 
     private void createCountriesDialog() {
 
@@ -250,6 +274,125 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void updateProfileWithoutImage() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .updateProfileWithoutImage(String.valueOf(userModel.getData().getId()),model.getFirst_name(), model.getLast_name(), model.getPhone_code(), model.getPhone(), model.getEmail())
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            preferences = Preferences.getInstance();
+                            preferences.create_update_userdata(SignUpActivity.this, response.body());
+                            setResult(RESULT_OK);
+                            finish();
+
+                        } else {
+                            try {
+                                Log.e("error",response.code()+"__"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (response.code() == 500) {
+                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            }else if(response.code()==422){
+                                Toast.makeText(SignUpActivity.this, R.string.em_ph_exist, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+
+                            try {
+                                Log.e("error", response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
+
+    private void updateProfileWithImage() {
+
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        RequestBody id_part = Common.getRequestBodyText(String.valueOf(userModel.getData().getId()));
+        RequestBody first_name_part = Common.getRequestBodyText(model.getFirst_name());
+        RequestBody last_name_part = Common.getRequestBodyText(model.getLast_name());
+        RequestBody phone_code_part = Common.getRequestBodyText(model.getPhone_code());
+        RequestBody phone_part = Common.getRequestBodyText(model.getPhone());
+        RequestBody email_part = Common.getRequestBodyText(model.getEmail());
+        MultipartBody.Part image = Common.getMultiPart(this, uri, "logo");
+
+
+        Api.getService(Tags.base_url)
+                .updateProfileWithImage(id_part,first_name_part,last_name_part,phone_code_part,phone_part,email_part,image)
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            preferences = Preferences.getInstance();
+                            preferences.create_update_userdata(SignUpActivity.this, response.body());
+                            setResult(RESULT_OK);
+                            finish();
+                        } else {
+                            try {
+                                Log.e("error",response.code()+"__"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (response.code() == 500) {
+                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            }else if(response.code()==422){
+                                Toast.makeText(SignUpActivity.this, R.string.em_ph_exist, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+                                Log.e("msg_category_error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+
     }
 
     private void navigateToHomeActivity() {

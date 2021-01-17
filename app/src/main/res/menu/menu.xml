@@ -11,10 +11,10 @@
         android:icon="@drawable/ic_category"
         />
 
-    <item android:id="@+id/offers"
+    <!--<item android:id="@+id/offers"
         android:title="@string/offers"
         android:icon="@drawable/ic_offers"
-        />
+        />-->
 
     <item android:id="@+id/orders"
         android:title="@string/orders"

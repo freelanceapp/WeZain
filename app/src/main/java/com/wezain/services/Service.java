@@ -1,6 +1,7 @@
 package com.wezain.services;
 
 import com.wezain.models.CartDataModel;
+import com.wezain.models.ProductDataModel;
 import com.wezain.models.SendOrderModel;
 import com.wezain.models.SingleOrderModel;
 import com.wezain.models.CategoryDataModel;
@@ -70,8 +71,29 @@ public interface Service {
     );
 
 
+    @FormUrlEncoded
+    @POST("api/update-profile")
+    Call<UserModel> updateProfileWithoutImage(@Field("id") String id,
+                                              @Field("first_name") String first_name,
+                                              @Field("last_name") String last_name,
+                                              @Field("phone_code") String phone_code,
+                                              @Field("phone") String phone,
+                                              @Field("email") String email);
+
+
     @Multipart
-    @POST("api/register")
+    @POST("api/update-profile")
+    Call<UserModel> updateProfileWithImage(@Part("id") RequestBody id,
+                                           @Part("first_name") RequestBody first_name,
+                                           @Part("last_name") RequestBody last_name,
+                                           @Part("phone_code") RequestBody phone_code,
+                                           @Part("phone") RequestBody phone,
+                                           @Part("email") RequestBody email,
+                                           @Part MultipartBody.Part logo
+    );
+
+    @Multipart
+    @POST("api/update-profile")
     Call<UserModel> signUpWithImage(@Part("first_name") RequestBody first_name,
                                     @Part("last_name") RequestBody last_name,
                                     @Part("phone_code") RequestBody phone_code,
@@ -133,6 +155,20 @@ public interface Service {
                                  @Field("email") String email,
                                  @Field("subject") String subject,
                                  @Field("message") String message
+    );
+
+
+    @GET("api/My-favourite")
+    Call<ProductDataModel> getFavourite(@Query("lang") String lang,
+                                        @Query("country") String country,
+                                        @Query("user_id") String user_id
+    );
+
+    @GET("api/Get-products-by-name-search")
+    Call<List<ProductModel>> search(@Query("lang") String lang,
+                                    @Query("country") String country,
+                                    @Query("user_id") String user_id,
+                                    @Query("key_search_name") String key_search_name
     );
 
 

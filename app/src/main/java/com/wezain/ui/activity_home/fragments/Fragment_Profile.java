@@ -23,9 +23,13 @@ import com.wezain.models.CartDataModel;
 import com.wezain.models.UserModel;
 import com.wezain.preferences.Preferences;
 import com.wezain.share.Common;
+import com.wezain.tags.Tags;
 import com.wezain.ui.activity_contact_us.ContactUsActivity;
+import com.wezain.ui.activity_favorite.FavoriteActivity;
 import com.wezain.ui.activity_home.HomeActivity;
 import com.wezain.ui.activity_language.LanguageActivity;
+import com.wezain.ui.activity_sign_up.SignUpActivity;
+import com.wezain.ui.activity_web_view.WebViewActivity;
 
 import io.paperdb.Paper;
 
@@ -93,6 +97,7 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
         if (userModel!=null){
             binding.setModel(userModel);
         }
+
         binding.setActions(this);
     }
 
@@ -100,6 +105,8 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
     public void onFavorite() {
         if (userModel!=null){
 
+            Intent intent = new Intent(activity, FavoriteActivity.class);
+            startActivityForResult(intent,300);
         }else {
             Toast.makeText(activity, getString(R.string.pls_signin_signup), Toast.LENGTH_SHORT).show();
         }
@@ -129,12 +136,21 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
 
     @Override
     public void onLogout() {
-
+        activity.logout();
     }
 
     @Override
     public void onHelp() {
+        Intent intent = new Intent(activity, WebViewActivity.class);
+        String url = Tags.base_url+lang+"/aboutUs";
+        intent.putExtra("url",url);
+        startActivity(intent);
+    }
 
+    @Override
+    public void onUpdateProfile() {
+        Intent intent = new Intent(activity, SignUpActivity.class);
+        startActivityForResult(intent,200);
     }
 
 
@@ -255,6 +271,11 @@ public class Fragment_Profile extends Fragment implements Listeners.ProfileActio
         if (requestCode==100&&resultCode== Activity.RESULT_OK&&data!=null){
             String lang = data.getStringExtra("lang");
             activity.refreshActivity(lang);
+        }else if (requestCode==200&&resultCode== Activity.RESULT_OK){
+            userModel = preferences.getUserData(activity);
+            binding.setModel(userModel);
+        }else if (requestCode==300&&resultCode== Activity.RESULT_OK){
+            activity.refreshFragmentHome();
         }
 
     }

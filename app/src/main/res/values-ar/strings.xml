@@ -106,5 +106,8 @@
     <string name="details2">التفاصيل:-</string>
     <string name="delete">حذف</string>
     <string name="will_delete_cart">سيتم حذف المنتجات من السلة نظرا لاختلاف الاسعار.</string>
+    <string name="update_profile">تعديل الملف الشخصي</string>
+    <string name="back">رجوع</string>
+    <string name="no_search_results">لا توجد نتائج للبحث</string>
 
 </resources>

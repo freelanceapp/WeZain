@@ -53,7 +53,7 @@ public class CheckOutActivity extends AppCompatActivity {
     private SendOrderModel model;
     private List<CityModel> cityModelList;
     private CitySpinnerAdapter citySpinnerAdapter;
-    private String country, myCountry;
+    private String country;
 
 
     @Override
@@ -139,10 +139,15 @@ public class CheckOutActivity extends AppCompatActivity {
 
         binding.btnSend.setOnClickListener(view -> {
             if (model.isDataValid(this)) {
-                Intent intent = getIntent();
-                intent.putExtra("data", model);
-                setResult(RESULT_OK, intent);
-                finish();
+                if (userModel!=null){
+                    Intent intent = getIntent();
+                    intent.putExtra("data", model);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }else {
+                    Toast.makeText(this,getString(R.string.pls_signin_signup), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

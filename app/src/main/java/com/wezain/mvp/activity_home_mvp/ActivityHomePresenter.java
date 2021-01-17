@@ -44,9 +44,9 @@ public class ActivityHomePresenter {
             case R.id.categories :
                 displayFragmentCategories(selectedPos);
                 break;
-            case R.id.offers :
+            /*case R.id.offers :
                 displayFragmentOffers();
-                break;
+                break;*/
 
             case R.id.orders :
                 displayFragmentOrders();

@@ -22,6 +22,7 @@ import com.wezain.mvp.activity_home_mvp.HomeActivityView;
 import com.wezain.preferences.Preferences;
 import com.wezain.ui.activity_cart.CartActivity;
 import com.wezain.ui.activity_login.LoginActivity;
+import com.wezain.ui.activity_search.SearchActivity;
 
 import java.util.List;
 
@@ -72,6 +73,11 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
             startActivity(intent);
         });
 
+        binding.flSearch.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivityForResult(intent,100);
+        });
+
 
 
     }
@@ -86,6 +92,9 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
         List<Fragment> fragments = fragmentManager.getFragments();
         for (Fragment fragment : fragments) {
             fragment.onActivityResult(requestCode, resultCode, data);
+        }
+        if (requestCode==100&&resultCode==RESULT_OK){
+            refreshFragmentHome();
         }
     }
 
@@ -129,6 +138,10 @@ public class HomeActivity extends AppCompatActivity implements HomeActivityView 
 
     }
 
+    public void logout(){
+        preferences.clear(this);
+        onNavigateToLoginActivity();
+    }
 
     @Override
     protected void onResume() {

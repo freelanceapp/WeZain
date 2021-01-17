@@ -104,4 +104,7 @@
     <string name="details2">Details:-</string>
     <string name="delete">Delete</string>
     <string name="will_delete_cart">Will Delete products from cart</string>
+    <string name="update_profile">Update profile</string>
+    <string name="back">Back</string>
+    <string name="no_search_results">No search results</string>
 </resources>

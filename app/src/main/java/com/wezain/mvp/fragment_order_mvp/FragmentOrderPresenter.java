@@ -37,6 +37,7 @@ public class FragmentOrderPresenter {
     public void getOrders(String lang,String country)
     {
         if (userModel == null) {
+            view.onFailed("");
             return;
         }
         String user_id = String.valueOf(userModel.getData().getId());

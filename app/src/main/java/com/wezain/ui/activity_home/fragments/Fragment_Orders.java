@@ -108,7 +108,12 @@ public class Fragment_Orders extends Fragment implements FragmentOrderView {
     @Override
     public void onFailed(String msg) {
         binding.swipeRefresh.setRefreshing(false);
-        Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+        if (!msg.isEmpty()){
+            Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show();
+
+        }else {
+           binding.tvNoData.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

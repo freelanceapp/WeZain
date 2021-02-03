@@ -1,6 +1,8 @@
 package com.wezain.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.wezain.R;
 import com.wezain.databinding.ProductRow3Binding;
 import com.wezain.models.OrderModel;
-
 import java.util.List;
 
 public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapter.MyHolder> {
@@ -19,11 +20,13 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
     private List<OrderModel.OrderDetailsProduct> list;
     private Context context;
     private String country;
+    private OrderModel orderModel;
 
-    public OrderProductAdapter(List<OrderModel.OrderDetailsProduct> list, Context context,String country) {
+    public OrderProductAdapter(List<OrderModel.OrderDetailsProduct> list, Context context,String country,OrderModel orderModel) {
         this.list = list;
         this.context = context;
         this.country = country;
+        this.orderModel = orderModel;
 
 
     }
@@ -38,9 +41,11 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
+        Log.e("mmmmmmmmmmmm",orderModel.getBill_currency()+"-----------");
         OrderModel.OrderDetailsProduct model = list.get(position);
         holder.binding.setModel(model);
         holder.binding.setCountry(country);
+        holder.binding.setOrdermodel(orderModel);
     }
 
     @Override

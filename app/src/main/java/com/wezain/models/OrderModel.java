@@ -126,7 +126,6 @@ public class OrderModel implements Serializable {
         private String single_price_be_offer;
         private String created_at;
         private ProductDetails product_details;
-        private String product_price;
 
 
         public int getId() {
@@ -161,9 +160,6 @@ public class OrderModel implements Serializable {
             return product_details;
         }
 
-        public String getProduct_price() {
-            return product_price;
-        }
     }
 
     public static class ProductImage implements Serializable {

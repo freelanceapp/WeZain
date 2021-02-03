@@ -7,6 +7,10 @@
             name="model"
             type="com.wezain.models.OrderModel.OrderDetailsProduct" />
         <variable
+            name="ordermodel"
+            type="com.wezain.models.OrderModel" />
+
+        <variable
             name="country"
             type="String" />
         <import type="android.view.View" />
@@ -121,7 +125,7 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        android:text='@{model.total_price+" "+(country.equals("eg")?@string/tl:@string/aed)}'
+                        android:text='@{model.total_price+" "+(ordermodel.bill_currency.equals("eg")?@string/tl:@string/aed)}'
 
                         />
                 </LinearLayout>

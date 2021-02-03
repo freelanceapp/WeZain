@@ -288,7 +288,7 @@
                             android:layout_weight=".5"
                             android:layout_gravity="top"
                             android:textStyle="bold"
-                            android:text='@{model.total_cost+" "+(country.equals("eg")?@string/tl:@string/aed)}'
+                            android:text='@{model.total_cost+" "+(model.bill_currency.equals("eg")?@string/tl:@string/aed)}'
 
 
 

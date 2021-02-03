@@ -39,6 +39,7 @@ public class OrderDetailsActivity extends AppCompatActivity implements ActivityO
     private String country;
     private Preferences preferences;
     private UserModel userModel;
+    public static String currency="";
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -77,11 +78,17 @@ public class OrderDetailsActivity extends AppCompatActivity implements ActivityO
                 }
             }
         }
+        if (orderModel.getBill_currency().equals("eg")){
+            currency=getString(R.string.tl);
+        }else {
+            currency=getString(R.string.aed);
+
+        }
 
         binding.setCountry(country);
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         binding.recView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        adapter = new OrderProductAdapter(cartProductModelList,this,country);
+        adapter = new OrderProductAdapter(cartProductModelList,this,country,orderModel);
         binding.recView.setAdapter(adapter);
         presenter = new ActivityOrderDetailsPresenter(this,this);
         presenter.getProduct(orderModel,lang,country);
